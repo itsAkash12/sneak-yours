@@ -8,7 +8,8 @@ It is for Project Building during PRD-B23
             -for day-2 branch name should be: fw20_1302_day-2
             -for day-3 branch name should be: fw20_1302_day-3
             -for day-4 branch name should be: fw20_1302_day-4
-            -for day-5 branch name should be: fw20_1302_day-5
+            through all the necessary days
+            
 
         2- How to create branches:
             - $git branch <branch-name> (without angle brackets)
