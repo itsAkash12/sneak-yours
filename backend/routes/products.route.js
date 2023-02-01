@@ -10,8 +10,18 @@ cloudinary.config({
 
 const products = Router();
 
-products.get("/", (req, res) => {
-  res.send("this is products route");
+products.get("/", async(req, res) => {
+  let count = 0;
+  try {
+    const product = await ProductModel.find();
+    for(let i=0; i<product.length; i++){
+      count++
+    }
+    console.log(count)
+    res.send(product);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 products.post("/add", async (req, res) => {
