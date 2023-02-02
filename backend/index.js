@@ -19,7 +19,7 @@ app.use(fileUpload({
 
 
 app.use("/users", users);
-// app.use(authenticator);
+app.use(authenticator);
 app.use("/products", products);
 
 app.listen(PORT, () => {
