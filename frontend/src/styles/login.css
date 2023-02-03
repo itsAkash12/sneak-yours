@@ -1,0 +1,8 @@
+.login_container{
+    width: 100%;
+    padding: 25px 0px;
+    background-image: url("../assets/images/bbblurry.svg");
+    margin:auto;
+    background-size: contain;
+    background-repeat: repeat;
+}

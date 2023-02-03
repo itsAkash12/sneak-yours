@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import "../styles/signup.css";
+import "../styles/login.css";
 import logo from "../assets/images/SneakYours.png";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
@@ -25,7 +25,7 @@ const Login = () => {
   };
   return (
     <Box
-      className="signup_container"
+      className="login_container"
       display={"flex"}
       justifyContent="center"
       alignItems={"center"}

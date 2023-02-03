@@ -3,15 +3,16 @@ import React from "react";
 import logo from "../../assets/images/SneakYours.png";
 import { IoIosArrowDown } from "react-icons/io";
 import { RiShoppingCart2Fill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputSearch from "./InputSearch";
 
 const WebNavbar = () => {
+  const navigate = useNavigate();
   return (
     <Box className="parentContainer">
       <Flex objectFit={"cover"} justify={"space-around"} alignItems="center">
         <Box>
-          <Image w="150px" src={logo} />
+          <Image w="150px" src={logo} onClick={()=> navigate("/")} cursor="pointer" />
         </Box>
         <Box color={"white"} display={"flex"} gap="30px">
           <Box

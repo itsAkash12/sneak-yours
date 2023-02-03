@@ -4,9 +4,11 @@ import WebNavbar from './WebNavbar'
 import "../../styles/navbar.css"
 import { useState } from 'react'
 import { useEffect } from 'react'
+import {useLocation} from "react-router-dom"
 
 const Navbar = () => {
   const [toggle, setToggle]= useState(false);
+  const location = useLocation();
 
   const toggleUp=()=>{
     if(window.scrollY >= 100 && window.location.pathname==="/"){
@@ -19,7 +21,7 @@ const Navbar = () => {
   }
   useEffect(() => {
     toggleUp()
-  }, [])
+  }, [location])
   window.addEventListener("scroll", toggleUp);
   
   
