@@ -5,9 +5,8 @@ import "../styles/signup.css"
 
 const Signup = () => {
   return (
-    <Box className='signup_container'>
-      <Box border={"1px solid white"}>
-
+    <Box className='signup_container' display={"flex"} justifyContent="center" alignItems={"center"}>
+      <Box w={"50%"} h={"300px"} bg="whiteAlpha.400" backdropFilter="blur(20px)" border={"1px solid white"} >
       </Box>
     </Box>
   )
