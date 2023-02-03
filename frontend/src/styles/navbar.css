@@ -1,0 +1,67 @@
+.navbar-container_active{
+  background: rgb(98, 4, 250);
+  background: linear-gradient(
+    140deg,
+    /* rgba(10, 2, 225, 1) 14%, */
+    rgba(98, 4, 250, 1) 14%,
+    rgba(253, 29, 29, 1) 62%,
+    rgba(252, 176, 69, 1) 99%
+  );
+  /* backdrop-filter:blur(100px); */
+}
+.navbar-container{
+  background: transparent;
+}
+/* Searc Input for webNavbar */
+.search-box {
+    /* position: absolute;
+    top: 5%;
+    right: 5%; */
+    /* transform: translate(-50%, -50%); */
+    /* height: 40px; */
+    border-radius: 50px;
+    padding: 10px;
+  }
+  .search-input {
+    outline: none;
+    border: 1px solid white;
+    background: none;
+    width: 0;
+    padding: 0;
+    border-radius: 50px;
+    color: #fff;
+    /* float: left; */
+    font-size: 16px;
+    transition: .3s;
+    line-height: 40px;
+  }
+  .search-input::placeholder {
+    color: #dbc5b0;
+  }
+  .search-btn {
+    color: #fff;
+    /* float: right; */
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: .3s;
+  }
+  /* .search-input:focus,
+  .search-input:not(:placeholder-shown) {
+    width: 240px; 
+    padding: 0 6px;
+  } */
+  .search-box:hover > .search-input {
+    width: 120px;
+    padding: 0 6px;
+  }
+  .search-box:hover > .search-btn,
+  .search-input:focus + .search-btn,
+  .search-input:not(:placeholder-shown) + .search-btn {
+    background: #fff;
+    color: #cd595a;
+  }
