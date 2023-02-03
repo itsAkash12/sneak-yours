@@ -9,7 +9,7 @@ import Signup from "../pages/Signup";
 const Allroutes = () => {
   return (
     <Box>
-      <Routes zIndex="-999">
+      <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />

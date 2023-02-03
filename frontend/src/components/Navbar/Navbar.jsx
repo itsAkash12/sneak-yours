@@ -24,7 +24,7 @@ const Navbar = () => {
   
   
   return (
-    <Box position="sticky" top="0" left="0" width="100%" margin={"auto"} className={toggle ? "navbar-container_active":"navbar-container"}>
+    <Box position="sticky" top="0" left="0" zIndex={"100"} width="100%" margin={"auto"} className={toggle ? "navbar-container_active":"navbar-container"}>
       <WebNavbar />
     </Box>
   )
