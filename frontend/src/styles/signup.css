@@ -1,0 +1,9 @@
+.signup_container{
+    width: 100%;
+    height: 100vh;
+    /* background: black; */
+    background-image: url("../assets/images/bbblurry.svg");
+    margin:auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
