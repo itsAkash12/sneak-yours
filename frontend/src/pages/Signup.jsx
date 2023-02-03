@@ -41,7 +41,6 @@ const Signup = () => {
       >
         <Box display={"flex"} justifyContent="center" alignItems={"center"}>
           <Box
-            backgroundImage={logo}
             mt={"20px"}
             w={"120px"}
             height="120px"
@@ -51,7 +50,9 @@ const Signup = () => {
             justifyContent="center"
             alignItems={"center"}
           >
+            <Link to="/">
             <Image src={logo}></Image>
+            </Link>
           </Box>
         </Box>
         <Box>
@@ -115,7 +116,7 @@ const Signup = () => {
             </InputGroup>
           </Stack>
           <Box mt={"20px"}>
-            <Button bg={"black"} color="white" _hover={{ bg: "white", color: "black" }}>JOIN US</Button>
+            <Button w="50%" bg={"black"} color="white" _hover={{ bg: "white", color: "black" }}>JOIN US</Button>
           </Box>
           <Box mt={"20px"} display="flex" gap={"10px"}>
             <Button
@@ -142,9 +143,9 @@ const Signup = () => {
             </Button>
           </Box>
           <Box mt={"20px"} display="flex" justifyContent={"center"} gap={"10px"} >
-            <Text color={"neon"}>Already Have an Account ?</Text>
+            <Text fontSize={"md"} color={"neon"}>Already Have an Account ?</Text>
             <Link to="/login">
-              <Text color={"Black"}>LogIn</Text>
+              <Text textDecoration={"underline"} fontSize={"lg"} color={"Black"}>Log In</Text>
             </Link>
           </Box>
         </Box>
