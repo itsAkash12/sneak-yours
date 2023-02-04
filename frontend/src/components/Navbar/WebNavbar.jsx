@@ -1,8 +1,9 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Badge, Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import logo from "../../assets/images/SneakYours.png";
 import { IoIosArrowDown } from "react-icons/io";
 import { RiShoppingCart2Fill } from "react-icons/ri";
+import { BsFillCartFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import InputSearch from "./InputSearch";
 
@@ -12,7 +13,12 @@ const WebNavbar = () => {
     <Box className="parentContainer">
       <Flex objectFit={"cover"} justify={"space-around"} alignItems="center">
         <Box>
-          <Image w="150px" src={logo} onClick={()=> navigate("/")} cursor="pointer" />
+          <Image
+            w="150px"
+            src={logo}
+            onClick={() => navigate("/")}
+            cursor="pointer"
+          />
         </Box>
         <Box color={"white"} display={"flex"} gap="30px">
           <Box
@@ -54,8 +60,11 @@ const WebNavbar = () => {
               LOGIN
             </Text>
           </Link>
-          <Link to={"/login"}>
-            <RiShoppingCart2Fill fontSize={"30px"} color="white" />
+          <Link to={"/cart"}>
+            <Box position={"relative"} >
+              <BsFillCartFill fontSize={"28px"}  color="white" />
+              <Text position={"absolute"} top="1" right="2.5" fontSize={"12px"} fontWeight="bolder">{2}</Text>
+            </Box>
           </Link>
         </Box>
       </Flex>
