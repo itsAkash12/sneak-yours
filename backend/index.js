@@ -22,6 +22,10 @@ app.use("/users", users);
 app.use(authenticator);
 app.use("/products", products);
 
+app.get("/", (req,res)=> {
+  res.send({msg:"Welcome to Homepage"});
+})
+
 app.listen(PORT, () => {
   connect();
   console.log(`server started on http://localhost:${PORT}`);
