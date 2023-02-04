@@ -1,9 +1,9 @@
 /* Hero Container */
+@import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
 
 .hero_parent {
   height: 100vh;
   /* position: relative; */
-  
   left: 0;
   right: 0;
   background: rgb(98, 4, 250);
@@ -23,10 +23,19 @@
 .hero_container{
     /* border: 1px solid white; */
     /* background-color: black; */
-    width: 95%;
+    width: 90%;
     height: 95vh;
     margin: auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+}
+
+.socialContainer>div{
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+.socialContainer>div:hover{
+  transform: scale(1.2);
+  transition: 0.2s ease-in;
 }
