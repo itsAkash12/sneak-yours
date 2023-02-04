@@ -1,4 +1,4 @@
-import { Box, Heading, Image } from "@chakra-ui/react";
+import { Box, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import "../../styles/homepage.css";
 import shoes from "../../assets/images/jordan.png";
@@ -8,23 +8,26 @@ const HeroContainer = () => {
   return (
     <Box className="hero_parent">
       <Box className="hero_container">
-        <Box>
-          <Heading>SUPERSTIKER</Heading>
-          <Heading>SUPERSTIKER</Heading>
-          <Heading>SUPERSTIKER</Heading>
+        <Box
+          fontSize={"2em"}
+          position={"relative"}
+          display={"flex"}
+          justifyContent="center"
+          alignItems={"center"}
+          className="shoesContainer"
+        >
+          <Text color={"whiteAlpha.800"} textShadow="rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px" backdropFilter={"blur(10px)"} fontSize={"210px"}>SNEAKYOURS</Text>
+          <Image position="absolute" w={"55%"} src={shoes} alt={shoes} />
         </Box>
-        <Box w={"30"} >
-          <Image w={"40%"} src={shoes} alt={shoes} />
-        </Box>
-        <Box>
-          <Box>
-            <BsTwitter />
+        <Box display={"flex"} flexDirection="column" gap={"40px"} className="socialContainer">
+          <Box border={"2px solid white"} p="10px" borderRadius={"50%"}>
+            <BsTwitter color="white" fontSize={"25px"} />
           </Box>
-          <Box>
-            <BsFacebook />
+          <Box border={"2px solid white"} p="10px" borderRadius={"50%"}>
+            <BsFacebook color="white" fontSize={"25px"} />
           </Box>
-          <Box>
-            <BsInstagram />
+          <Box border={"2px solid white"} p="10px" borderRadius={"50%"}>
+            <BsInstagram color="white" fontSize={"25px"} />
           </Box>
         </Box>
       </Box>
