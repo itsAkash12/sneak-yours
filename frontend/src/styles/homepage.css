@@ -1,5 +1,5 @@
 /* Hero Container */
-@import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Itim&family=Righteous&family=Roboto+Condensed&family=Ubuntu:ital@1&display=swap');
 
 .hero_parent {
   height: 100vh;
@@ -38,4 +38,42 @@
 .socialContainer>div:hover{
   transform: scale(1.2);
   transition: 0.2s ease-in;
+}
+
+/* Announcement Section */
+
+.marquee_container>div{
+  margin-right: 100px;
+}
+.marquee_container>div:nth-child(2)>p{
+  font-family: 'Dancing Script', cursive;
+}
+.marquee_container>div:nth-child(3)>p{
+  font-family: 'Itim', cursive;
+}
+.marquee_container>div:nth-child(4)>p{
+  font-family: 'Righteous', cursive;
+}
+.marquee_container>div:nth-child(5)>p{
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.marquee_container>div:nth-child(6)>p{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+/* Category Container */
+
+.category_container{
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+  margin: auto;
+  margin-top: 50px;
+}
+.category_container>div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
