@@ -5,7 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 function App() {
   return (
     <Box className="App">
-      <Navbar />
+      {/* <Navbar /> */}
       <Allroutes />
     </Box>
   );

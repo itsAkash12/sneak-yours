@@ -35,7 +35,7 @@
     /* border: 1px solid red; */
     width: 90%;
     margin: auto;
-    margin-top: 40px;
+    /* margin-top: 20px; */
 }
 .slider_heading{
     margin-top: 40px;
@@ -50,7 +50,7 @@
 .iPhone_slider_heading{
     width: 90%;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 50px;
     border-bottom: 1px solid rgba(66, 66, 66, 0.5);
 }
 

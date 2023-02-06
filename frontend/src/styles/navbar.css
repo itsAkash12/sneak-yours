@@ -66,3 +66,20 @@
     background: #fff;
     color: #cd595a;
   }
+
+  .mob_navbar_container{
+    display: none;
+  }
+
+  
+@media screen and (min-width: 200px) and (max-width: 900px){
+  .mob_navbar_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:5px 20px;
+  }
+  .web_navbar_container{
+    display: none;
+  }
+}

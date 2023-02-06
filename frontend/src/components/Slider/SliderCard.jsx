@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/slider.css";
@@ -11,11 +11,11 @@ function SliderCard({ img, title, subTitle, price, link }) {
           <Box>
             <Image src={img} alt="iphone" />
           </Box>
-          <Box>
-            <Text>{title}</Text>
+          <Box className="textContainer">
+            <Text>{subTitle}</Text>
+            <Heading fontSize={"xl"}>{title}</Heading>
           </Box>
           <Box>
-            <Text>{subTitle}</Text>
             <Text>
               <span>₹</span>
               {price}</Text>

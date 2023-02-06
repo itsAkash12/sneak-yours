@@ -5,6 +5,7 @@ import "../../styles/navbar.css"
 import { useState } from 'react'
 import { useEffect } from 'react'
 import {useLocation} from "react-router-dom"
+import MobNavbar from './MobNavbar'
 
 const Navbar = () => {
   const [toggle, setToggle]= useState(false);
@@ -28,6 +29,7 @@ const Navbar = () => {
   return (
     <Box position="sticky" top="0" left="0" zIndex={"100"} width="100%" margin={"auto"} className={toggle ? "navbar-container_active":"navbar-container"}>
       <WebNavbar />
+      <MobNavbar />
     </Box>
   )
 }

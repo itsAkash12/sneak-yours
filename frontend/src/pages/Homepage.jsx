@@ -4,6 +4,7 @@ import Announcement from "../components/LandingPage/Announcement";
 import HeroContainer from "../components/LandingPage/HeroContainer";
 import CategoryChoice from "../components/LandingPage/CategoryChoice";
 import SliderCarousel from "../components/Slider/SliderCarousel";
+import Navbar from "../components/Navbar/Navbar";
 
 const Homepage = () => {
   const sneakersData = [
@@ -112,6 +113,7 @@ const Homepage = () => {
   ];
   return (
     <Box>
+      <Navbar />
       <HeroContainer />
       <Announcement />
       <CategoryChoice />

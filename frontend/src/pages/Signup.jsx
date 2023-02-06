@@ -32,7 +32,7 @@ const Signup = () => {
       alignItems={"center"}
     >
       <Box
-        width="35%"
+        width={{ base: '80%',sm:'50%', md: '50%', lg: '35%' }}
         bg="blackAlpha.500"
         backdropFilter="blur(20px)"
         border={"1px solid white"}

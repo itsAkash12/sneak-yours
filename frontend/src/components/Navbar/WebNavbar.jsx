@@ -2,15 +2,16 @@ import { Badge, Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import logo from "../../assets/images/SneakYours.png";
 import { IoIosArrowDown } from "react-icons/io";
-import { RiShoppingCart2Fill } from "react-icons/ri";
 import { BsFillCartFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import InputSearch from "./InputSearch";
+import "../../styles/navbar.css"
+
 
 const WebNavbar = () => {
   const navigate = useNavigate();
   return (
-    <Box className="parentContainer">
+    <Box className="web_navbar_container">
       <Flex objectFit={"cover"} justify={"space-around"} alignItems="center">
         <Box>
           <Image

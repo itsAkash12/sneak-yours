@@ -6,13 +6,13 @@ import "slick-carousel/slick/slick-theme.css"
 import "../../styles/slider.css";
 import SampleNextArrow from "./SampleNextArrow";
 import SamplePrevArrow from "./SamplePrevArrow";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 
 function SliderCarousel({data}) {
   
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
@@ -32,14 +32,17 @@ function SliderCarousel({data}) {
       {
         breakpoint: 550,
         settings: {
+          dots: false,
           slidesToShow: 2,
-          initialSlide: 2,
+          slidesToScroll: 2,
         },
       },
       {
         breakpoint: 400,
         settings: {
+          dots: false,
           slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
     ],
@@ -47,7 +50,7 @@ function SliderCarousel({data}) {
   return (
     <Box>
       <Box className="iPhone_slider_heading">
-        <Text>Best selling iPhones</Text>
+        <Heading fontSize={"3xl"}>Best Selling JORDANS</Heading>
       </Box>
       <Box className="carousel_container">
         <Slider {...settings}>
