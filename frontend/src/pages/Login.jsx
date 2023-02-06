@@ -29,9 +29,10 @@ const Login = () => {
       display={"flex"}
       justifyContent="center"
       alignItems={"center"}
+      paddingBottom={{ base: '120px',sm:'100px', md: '50px', lg: '50px' }}
     >
       <Box
-        width="35%"
+        width={{ base: '80%',sm:'50%', md: '50%', lg: '35%' }}
         bg="blackAlpha.500"
         backdropFilter="blur(20px)"
         border={"1px solid white"}
@@ -110,7 +111,7 @@ const Login = () => {
               _hover={{ bg: "#e2e6eb", color: "black" }}
               leftIcon={<FcGoogle fontSize={"20px"} />}
               textColor={"black"}
-              fontSize={"14px"}
+              fontSize={{ base: '12px',sm:'12px', md: '14px', lg: '14px' }}
               w="80%"
             >
               Sign Up with Google
@@ -121,7 +122,7 @@ const Login = () => {
               _hover={{ bg: "#e2e6eb" }}
               leftIcon={<FaGithub fontSize={"20px"} />}
               textColor={"#black"}
-              fontSize={"14px"}
+              fontSize={{ base: '12px',sm:'12px', md: '14px', lg: '14px' }}
               w="80%"
             >
               Sign Up with GitHub

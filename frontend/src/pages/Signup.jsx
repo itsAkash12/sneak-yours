@@ -92,6 +92,7 @@ const Signup = () => {
               variant="filled"
               placeholder="Gender"
               ml={"10px"}
+              fontSize={{ base: '12px',sm:'12px', md: '14px', lg: '14px' }}
             >
               <option value="male">MALE</option>
               <option value="female">FEMALE</option>
@@ -118,14 +119,14 @@ const Signup = () => {
           <Box mt={"20px"}>
             <Button w="50%" bg={"black"} color="white" _hover={{ bg: "white", color: "black" }}>JOIN US</Button>
           </Box>
-          <Box mt={"20px"} display="flex" gap={"10px"}>
+          <Box mt={"20px"} display="flex" flexDirection={{ base: 'column',sm:'column', md: 'row', lg: 'row' }} gap={"10px"} justifyContent="center" alignItems="center">
             <Button
               bg="white"
               border={"1px solid lightgrey"}
               _hover={{ bg: "#e2e6eb", color: "black" }}
               leftIcon={<FcGoogle fontSize={"20px"} />}
               textColor={"black"}
-              fontSize={"14px"}
+              fontSize={{ base: '12px',sm:'12px', md: '14px', lg: '14px' }}
               w="50%"
             >
               Sign Up with Google
@@ -136,7 +137,7 @@ const Signup = () => {
               _hover={{ bg: "#e2e6eb" }}
               leftIcon={<FaGithub fontSize={"20px"} />}
               textColor={"#black"}
-              fontSize={"14px"}
+              fontSize={{ base: '12px',sm:'12px', md: '14px', lg: '14px' }}
               w="50%"
             >
               Sign Up with GitHub
