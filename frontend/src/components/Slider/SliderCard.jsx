@@ -9,7 +9,7 @@ function SliderCard({ img, title, subTitle, price, link }) {
       <Link to={link}>
         <Box className="slider_card_parent">
           <Box>
-            <Image src={img} alt="iphone" />
+            <Image src={img} alt="shoes" />
           </Box>
           <Box className="textContainer">
             <Text>{subTitle}</Text>

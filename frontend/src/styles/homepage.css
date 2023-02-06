@@ -1,5 +1,5 @@
 /* Hero Container */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Itim&family=Righteous&family=Roboto+Condensed&family=Ubuntu:ital@1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Itim&family=Righteous&family=Roboto+Condensed&family=Ubuntu:ital@1&display=swap");
 
 .hero_parent {
   height: 100vh;
@@ -20,60 +20,80 @@
   align-items: center;
 }
 
-.hero_container{
-    /* border: 1px solid white; */
-    /* background-color: black; */
-    width: 90%;
-    height: 95vh;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.hero_container {
+  /* border: 1px solid white; */
+  /* background-color: black; */
+  width: 90%;
+  height: 95vh;
+  margin: auto;
+  align-items: center;
 }
 
-.socialContainer>div{
+.socialContainer > div {
   cursor: pointer;
   transition: 0.2s ease-out;
 }
-.socialContainer>div:hover{
+.socialContainer > div:hover {
   transform: scale(1.2);
   transition: 0.2s ease-in;
 }
 
 /* Announcement Section */
 
-.marquee_container>div{
+.marquee_container > div {
   margin-right: 100px;
 }
-.marquee_container>div:nth-child(2)>p{
-  font-family: 'Dancing Script', cursive;
+.marquee_container > div:nth-child(2) > p {
+  font-family: "Dancing Script", cursive;
 }
-.marquee_container>div:nth-child(3)>p{
-  font-family: 'Itim', cursive;
+.marquee_container > div:nth-child(3) > p {
+  font-family: "Itim", cursive;
 }
-.marquee_container>div:nth-child(4)>p{
-  font-family: 'Righteous', cursive;
+.marquee_container > div:nth-child(4) > p {
+  font-family: "Righteous", cursive;
 }
-.marquee_container>div:nth-child(5)>p{
-  font-family: 'Roboto Condensed', sans-serif;
+.marquee_container > div:nth-child(5) > p {
+  font-family: "Roboto Condensed", sans-serif;
 }
-.marquee_container>div:nth-child(6)>p{
-  font-family: 'Ubuntu', sans-serif;
+.marquee_container > div:nth-child(6) > p {
+  font-family: "Ubuntu", sans-serif;
 }
 
 /* Category Container */
 
-.category_container{
+.category_container {
   width: 90%;
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin: auto;
   margin-top: 50px;
 }
-.category_container>div{
+.category_container > div {
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+@media screen and (min-width: 200px) and (max-width: 430px) {
+  /* .shoesContainer > p {
+    font-size: 3em;
+  } */
+  .hero_parent{
+    height: 90vh;
+  }
+  .category_container{
+    width: 80%;
+    grid-template-columns: repeat(1,1fr);
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 580px) {
+  .hero_container{
+    width: 100%
+  }
+  .shoesContainer > p {
+    font-size: 80px;
+  }
 }

@@ -50,7 +50,7 @@ function SliderCarousel({data}) {
   return (
     <Box>
       <Box className="iPhone_slider_heading">
-        <Heading fontSize={"3xl"}>Best Selling JORDANS</Heading>
+        <Heading fontSize={{ base: 'lg',sm:'xl', md: '2xl', lg: '3xl' }}>Best Selling JORDANS</Heading>
       </Box>
       <Box className="carousel_container">
         <Slider {...settings}>
