@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+html {
+  scroll-behaviour: smooth;
+}
 body {
   margin: 0;
   padding: 0;
@@ -8,7 +11,7 @@ body {
   /* font-family: 'Roboto Condensed', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 
 code {
