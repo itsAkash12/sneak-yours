@@ -75,7 +75,16 @@
   align-items: center;
   cursor: pointer;
 }
-
+.textContainer>p:nth-child(1){
+  background: linear-gradient(
+        140deg,
+        rgba(98, 4, 250, 1) 14%,
+        rgba(253, 29, 29, 1) 62%,
+        rgba(252, 176, 69, 1) 99%
+      );
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+}
 @media screen and (min-width: 200px) and (max-width: 430px) {
   /* .shoesContainer > p {
     font-size: 3em;

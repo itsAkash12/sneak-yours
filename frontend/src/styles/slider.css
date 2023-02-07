@@ -52,7 +52,21 @@
     margin: auto;
     margin-top: 50px;
     border-bottom: 1px solid rgba(66, 66, 66, 0.5);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
+.iPhone_slider_heading>h2:nth-child(2){
+    background: linear-gradient(
+        140deg,
+        rgba(98, 4, 250, 1) 14%,
+        rgba(253, 29, 29, 1) 62%,
+        rgba(252, 176, 69, 1) 99%
+      );
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+}
+
 
 @media screen and (min-width: 400px) and (max-width: 550px){
     .carousel_container{

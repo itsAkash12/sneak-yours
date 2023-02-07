@@ -48,11 +48,12 @@ function SliderCarousel({data}) {
     ],
   };
   return (
-    <Box>
+    <Box >
       <Box className="iPhone_slider_heading">
-        <Heading fontSize={{ base: 'lg',sm:'xl', md: '2xl', lg: '3xl' }}>Best Selling JORDANS</Heading>
+        <Heading  fontSize={{ base: 'lg',sm:'xl', md: '2xl', lg: '3xl' }}>Best Selling</Heading>
+        <Heading fontSize={{ base: 'lg',sm:'xl', md: '2xl', lg: '3xl' }}>JORDANS</Heading>
       </Box>
-      <Box className="carousel_container">
+      <Box data-aos="fade-right" className="carousel_container">
         <Slider {...settings}>
           {data && data.map((el, index) => (
             <Box key={index}>
