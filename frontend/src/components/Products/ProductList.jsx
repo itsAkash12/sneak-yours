@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   Grid,
   GridItem,
   Heading,
@@ -13,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import "../../styles/products.css"
+import DrawerFilter from "./DrawerFilter";
 
 const ProductList = () => {
   const sneakersData = [
@@ -115,19 +118,25 @@ const ProductList = () => {
     },
   ];
   return (
-    <Box w={"75%"}>
-      <Box borderBottom={"2px solid rgba(66, 66, 66, 0.5)"} padding={"30px 0px"}>
-        <Grid templateColumns={"repeat(2,1fr)"}>
-          <GridItem>
-            <Heading>JORDAN SNEAKERS</Heading>
-          </GridItem>
-          <GridItem>
+    <Box className="product_container" w={{base:"90%", sm:"90%", md:"75%", lg:"75%", xl:"75%"}} margin="auto">
+      <Box borderBottom={"2px solid "} padding={"30px 0px"} >
+        <Flex className="product_flex_container">
+          <Box className="filter_drawer">
+            <DrawerFilter></DrawerFilter>
+          </Box>
+          <Box display={"flex"} justifyContent="center" alignItems={"center"}>
+            <Heading
+            fontSize={{base:"lg", sm:"xl", md:"3xl", lg:"3xl", xl:"4xl"}}
+            >JORDAN SNEAKERS</Heading>
+          </Box>
+          <Box display={"flex"} justifyContent="center" alignItems={"center"}>
             <Menu>
               <MenuButton
                 bg={"transparent"}
                 _hover={"transparent"}
                 as={Button}
                 rightIcon={<IoIosArrowDown />}
+                fontSize={{base:"sm", sm:"md", md:"md", lg:"lg", xl:"lg"}}
               >
                 SORT BY
               </MenuButton>
@@ -138,11 +147,11 @@ const ProductList = () => {
                 <MenuItem>LATEST</MenuItem>                
               </MenuList>
             </Menu>
-          </GridItem>
-        </Grid>
+          </Box>
+        </Flex>
       </Box>
       <Box w={"90%"} margin="30px auto">
-        <Grid templateColumns={"repeat(3,1fr)"} gap="30px">
+        <Grid className="product_grid_container" templateColumns={{base:"repeat(1,1fr)", sm:"repeat(1,1fr)", md:"repeat(2,1fr)", lg:"repeat(3,1fr)", xl:"repeat(3,1fr)"}} gap="30px">
           {sneakersData &&
             sneakersData.map((el) => (
               <GridItem key={el.id}>
