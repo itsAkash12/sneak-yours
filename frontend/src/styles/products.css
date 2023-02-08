@@ -15,7 +15,7 @@
         rgba(252, 176, 69, 1) 99%
       );
       -webkit-text-fill-color: transparent;
-      -webkit-background-clip: text;
+      background-clip: text;
       letter-spacing: 0.5px;
       text-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
