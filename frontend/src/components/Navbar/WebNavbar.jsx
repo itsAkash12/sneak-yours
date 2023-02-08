@@ -11,7 +11,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/SneakYours.png";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsFillCartFill } from "react-icons/bs";
@@ -21,12 +21,28 @@ import "../../styles/navbar.css";
 
 const WebNavbar = () => {
   const navigate = useNavigate();
+  const [scrollTop, setScrollTop] = useState(0);
+  const [height, setHeight] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { 
-    isOpen: isOpenReportModal, 
-    onOpen: onOpenReportModal, 
-    onClose: onCloseReportModal 
-} = useDisclosure()
+  const {
+    isOpen: isOpenReportModal,
+    onOpen: onOpenReportModal,
+    onClose: onCloseReportModal,
+  } = useDisclosure();
+
+  const onScroll = () => {
+    const winScroll = document.documentElement.scrollTop;
+    const height =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+      
+    const scrolled = (winScroll / height) * 100;
+    setScrollTop(scrolled);
+    setHeight(scrolled);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+  }, []);
   return (
     <Box className="web_navbar_container">
       <Flex objectFit={"cover"} justify={"space-around"} alignItems="center">
@@ -69,11 +85,25 @@ const WebNavbar = () => {
                   <IoIosArrowDown />
                 </Box>
               </MenuButton>
-              <MenuList fontSize={"lg"} color={"black"} minW="x">
-                <MenuItem>JORDAN High {">"}</MenuItem>
-                <MenuItem>JORDAN Low {">"}</MenuItem>
-                <MenuItem>DUNK {">"}</MenuItem>
-                <MenuItem>APPAREL {">"}</MenuItem>
+              <MenuList
+                onMouseEnter={onOpen}
+                onMouseLeave={onClose}
+                fontSize={"lg"}
+                color={"black"}
+                minW="x"
+              >
+                <Link to="/products/id">
+                  <MenuItem>JORDAN High {">"}</MenuItem>
+                </Link>
+                <Link to={"/products/id"}>
+                  <MenuItem>JORDAN Low {">"}</MenuItem>
+                </Link>
+                <Link to={"/products/id"}>
+                  <MenuItem>DUNK {">"}</MenuItem>
+                </Link>
+                <Link to={"/products/id"}>
+                  <MenuItem>APPAREL {">"}</MenuItem>
+                </Link>
               </MenuList>
             </Menu>
             <Menu border="none" isOpen={isOpenReportModal} size={"xl"}>
@@ -100,11 +130,20 @@ const WebNavbar = () => {
                   <IoIosArrowDown />
                 </Box>
               </MenuButton>
-              <MenuList fontSize={"lg"} color={"black"} minW="x">
-                <MenuItem>JORDAN High {">"}</MenuItem>
-                <MenuItem>JORDAN Low {">"}</MenuItem>
-                <MenuItem>DUNK {">"}</MenuItem>
-                <MenuItem>APPAREL {">"}</MenuItem>
+              <MenuList onMouseEnter={onOpenReportModal}
+                onMouseLeave={onCloseReportModal} fontSize={"lg"} color={"black"} minW="x">
+              <Link to="/products/id">
+                  <MenuItem>JORDAN High {">"}</MenuItem>
+                </Link>
+                <Link to={"/products/id"}>
+                  <MenuItem>JORDAN Low {">"}</MenuItem>
+                </Link>
+                <Link to={"/products/id"}>
+                  <MenuItem>DUNK {">"}</MenuItem>
+                </Link>
+                <Link to={"/products/id"}>
+                  <MenuItem>APPAREL {">"}</MenuItem>
+                </Link>
               </MenuList>
             </Menu>
           </Box>
@@ -147,6 +186,11 @@ const WebNavbar = () => {
           </Link>
         </Box>
       </Flex>
+      <Box className="div_five_container">
+        <Box h={height > 10 ? "4px":"0px"} className="div_five_container_progress">
+          <Box w={height > 10 ? `${scrollTop}%`: "0"} className="div_five_container_style"></Box>
+        </Box>
+      </Box>
     </Box>
   );
 };

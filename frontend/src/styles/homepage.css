@@ -83,7 +83,7 @@
         rgba(252, 176, 69, 1) 99%
       );
       -webkit-text-fill-color: transparent;
-      -webkit-background-clip: text;
+      background-clip: text;
 }
 @media screen and (min-width: 200px) and (max-width: 430px) {
   /* .shoesContainer > p {
