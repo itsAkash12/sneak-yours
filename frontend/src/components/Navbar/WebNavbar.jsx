@@ -149,10 +149,10 @@ const WebNavbar = () => {
           </Box>
           <Box display={"flex"} gap="20px">
             <Box display={"flex"} justifyContent="center" alignItems="center">
-              <Text fontSize={"20px"}>JORDAN</Text>
+              <Link to={"/products"}><Text fontSize={"20px"}>JORDAN</Text></Link>
             </Box>
             <Box display={"flex"} justifyContent="center" alignItems="center">
-              <Text fontSize={"20px"}>WISHLIST</Text>
+              <Link to={"/wishlist"}><Text fontSize={"20px"}>WISHLIST</Text></Link>
             </Box>
             <Box w={"180px"}>
               <InputSearch></InputSearch>
