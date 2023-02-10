@@ -3,9 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 const connect = require("./config/db");
-const users = require("./routes/users.route");
+const {users, products} = require("./routes")
 const authenticator = require("./middlewares/authenticator.middleware");
-const products = require("./routes/products.route");
 const fileUpload = require("express-fileupload")
 
 const app = express();
