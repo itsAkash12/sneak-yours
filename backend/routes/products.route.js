@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { getProduct } = require("../controllers/products.controller");
+const ProductModel = require("../models/products.model");
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({

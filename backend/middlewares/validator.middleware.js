@@ -1,16 +1,10 @@
 const validate = (req, res, next) => {
   if (req.path === "/register") {
     const { firstname, lastname, email, gender, password } = req.body;
-    if (
-      firstname == "" ||
-      lastname == "" ||
-      email == "" ||
-      gender == "" ||
-      (password == "" || password.length < 8)
-    ) {
+    if (password.length < 8) {
       return res.send({
         message:
-          "All the necessary fields Should be filled and password must be 8 digits",
+          "Password must be more than or of 8 digits",
       });
     } else {
       next();

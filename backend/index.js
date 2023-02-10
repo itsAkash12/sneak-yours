@@ -23,7 +23,7 @@ app.get("/", (req,res)=> {
 
 app.use("/users", users);
 app.use("/products", products);
-app.use(roleChecker);
+// app.use(roleChecker);
 app.use("/admin", admin);
 
 

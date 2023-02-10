@@ -1,5 +1,12 @@
 const UserModel = require("../models/users.model");
 const ProductModel = require("../models/products.model");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dyv0uxpi2",
+  api_key: "771656121491761",
+  api_secret: "05-YkXiWK0lDwzEe1JKpxaqbYKw",
+});
 
 // USERS RELATED OPERATIONS
 const getUsers = async (id) => {
@@ -42,8 +49,6 @@ const deleteUser = async (id) => {
   }
 };
 
-
-
 // PRODUCT RELATED OPERATIONS
 const getProducts = async (id) => {
   if (!id) {
@@ -59,6 +64,44 @@ const getProducts = async (id) => {
         description: "Can't Find the PRoduct With this ID",
       };
     }
+  }
+};
+
+const createProduct = async (photos,payload) => {
+  let photoArray = [];
+  if (photos) {
+    for (let i = 0; i < photos.length; i++) {
+      let result = await cloudinary.uploader.upload(
+        photos[i].tempFilePath,
+        { timeout: 40000 },
+        (err) => {
+          if (err) {
+            return (err);
+          }
+        }
+      );
+      photoArray.push({
+        url: result.secure_url,
+      });
+      if (photoArray.length == 5) {
+        const product = new ProductModel({...payload, images:photoArray})
+        await product.save();
+        return ({
+          message: "success",
+          description: "Successfully added the Products",
+        });
+      }else{
+        return {
+          message: "failed Request",
+          description: "Can't able to perform this operation",
+        };
+      }
+    }
+  }else{
+    return {
+      message: "failed Request",
+      description: "Can't able to Perform this Operation",
+    };
   }
 };
 
@@ -85,4 +128,10 @@ const deleteProduct = async (id) => {
   }
 };
 
-module.exports = { getUsers, deleteUser, getProducts };
+module.exports = {
+  getUsers,
+  deleteUser,
+  getProducts,
+  createProduct,
+  deleteProduct,
+};

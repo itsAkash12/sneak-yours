@@ -1,40 +1,26 @@
 require("dotenv").config();
 const { Router } = require("express");
-const { registerUser, loginUser } = require("../controllers/users.controller");
-const UserModel = require("../models/users.model")
+const UserModel = require("../models/users.model");
+const { getUsers, registerUser, loginUser } = require("../controllers/usersController");
+const { body } = require("express-validator");
+const validate = require("../middlewares/validator.middleware");
 const users = Router();
-const validate = require("../middlewares/validator.middleware")
 
-users.get("/", async (req, res) => {
-  try {
-    const user = await UserModel.find();
-    res.send(user);
-  } catch (error) {
-    res.send(error.message);
-  }
-});
+users.get("/", getUsers);
+users.get("/:id", getUsers);
+users.post(
+  "/register",
+  validate,
+  [
+    body("firstname", "Please enter your first name").not().isEmpty(),
+    body("lastname", "Please enter your last name").not().isEmpty(),
+    body("email", "Please enter your email").isEmail().isEmpty(),
+    body("gender", "Please enter your gender").not().isEmpty(),
+    body("password", "Please enter your password").isLength({ min: 8 }),
+  ],
+  registerUser
+);
+users.post("/login", validate, loginUser);
 
-users.post("/register", validate,  async (req, res) => {
-  const {firstname,lastname,email,gender,password} = req.body;
-  try {
-    const result = await registerUser({firstname,lastname,email,gender,password});
-    if(result.message != "success"){
-      return res.send({message:"failure", description:"error while creating the user"});
-    }
-    return res.send(result);
-  } catch (error) {
-    res.send(error.message);
-  }
-});
-
-users.post("/login", validate , async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const result = await loginUser({email, password});
-    res.send(result);
-  } catch (error) {
-    res.send(error.message);
-  }
-});
 
 module.exports = users;
