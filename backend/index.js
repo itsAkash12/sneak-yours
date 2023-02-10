@@ -17,14 +17,13 @@ app.use(fileUpload({
   tempFileDir:'/tmp/'
 }))
 
-
-app.use("/users", users);
-app.use(authenticator);
-app.use("/products", products);
-
 app.get("/", (req,res)=> {
   res.send({msg:"Welcome to Homepage"});
 })
+
+app.use("/users", users);
+app.use("/products", products);
+
 
 app.listen(PORT, () => {
   connect();
