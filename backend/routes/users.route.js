@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { Router } = require("express");
 const { registerUser, loginUser } = require("../controllers/users.controller");
+const UserModel = require("../models/users.model")
 const users = Router();
 
 users.get("/", async (req, res) => {
