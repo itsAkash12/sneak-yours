@@ -1,18 +1,13 @@
 const { Router } = require("express");
-const { getProduct } = require("../controllers/productsController");
-const ProductModel = require("../models/products.model");
-const cloudinary = require("cloudinary").v2;
-
-cloudinary.config({
-  cloud_name: "dyv0uxpi2",
-  api_key: "771656121491761",
-  api_secret: "05-YkXiWK0lDwzEe1JKpxaqbYKw",
-});
+const { getProduct, addProduct, deleteProduct } = require("../controllers/productsController");
+const roleChecker = require("../middlewares/role.middleware")
 
 const products = Router();
 
 products.get("/", getProduct);
 products.get("/:id", getProduct);
+products.post("/add", roleChecker, addProduct)
+products.delete("/delete/:id", roleChecker, deleteProduct)
 
 
 // products.post("/add", async (req, res) => {
