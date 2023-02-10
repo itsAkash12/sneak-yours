@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getProduct } = require("../controllers/products.controller");
+const { getProduct } = require("../controllers/productsController");
 const ProductModel = require("../models/products.model");
 const cloudinary = require("cloudinary").v2;
 
@@ -11,24 +11,9 @@ cloudinary.config({
 
 const products = Router();
 
-products.get("/", async(req, res) => {
-  try {
-    const result = await getProduct();
-    res.send(result);
-  } catch (error) {
-    res.send(error.message);
-  }
-});
+products.get("/", getProduct);
+products.get("/:id", getProduct);
 
-products.get("/:id", async(req, res) => {
-  const {id} = req.params;
-  try {
-    const result = await getProduct(id);
-    res.send(result);
-  } catch (error) {
-    res.send(error);
-  }
-});
 
 // products.post("/add", async (req, res) => {
 //   const photos = [...req.files.images];
