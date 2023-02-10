@@ -3,8 +3,9 @@ const express = require("express");
 const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 const connect = require("./config/db");
-const {users, products} = require("./routes")
+const {users, products, admin} = require("./routes")
 const authenticator = require("./middlewares/authenticator.middleware");
+const roleChecker = require("./middlewares/role.middleware");
 const fileUpload = require("express-fileupload")
 
 const app = express();
@@ -22,6 +23,8 @@ app.get("/", (req,res)=> {
 
 app.use("/users", users);
 app.use("/products", products);
+app.use(roleChecker);
+app.use("/admin", admin);
 
 
 app.listen(PORT, () => {

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/users.model");
@@ -37,7 +38,9 @@ const loginUser = async ({ email, password }) => {
     if (verify) {
       const details = {
         id: user._id,
-        name: user.name,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        gender: user.gender,
         email: user.email,
         role: user.role,
       };
