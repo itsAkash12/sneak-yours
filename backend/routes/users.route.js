@@ -3,6 +3,7 @@ const { Router } = require("express");
 const { registerUser, loginUser } = require("../controllers/users.controller");
 const UserModel = require("../models/users.model")
 const users = Router();
+const validate = require("../middlewares/validator.middleware")
 
 users.get("/", async (req, res) => {
   try {
@@ -13,7 +14,7 @@ users.get("/", async (req, res) => {
   }
 });
 
-users.post("/register", async (req, res) => {
+users.post("/register", validate,  async (req, res) => {
   const {firstname,lastname,email,gender,password} = req.body;
   try {
     const result = await registerUser({firstname,lastname,email,gender,password});
@@ -26,7 +27,7 @@ users.post("/register", async (req, res) => {
   }
 });
 
-users.post("/login", async (req, res) => {
+users.post("/login", validate , async (req, res) => {
   const { email, password } = req.body;
   try {
     const result = await loginUser({email, password});
