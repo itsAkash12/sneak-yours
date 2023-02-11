@@ -13,9 +13,6 @@
     /* margin-top: 20px; */
     text-align: center;
 }
-.slider_card_parent>div:nth-child(2)>p{
-    
-}
 .slider_card_parent>div:nth-child(3){
     /* margin-top: 15px; */
     text-align: center;
@@ -64,7 +61,7 @@
         rgba(252, 176, 69, 1) 99%
       );
       -webkit-text-fill-color: transparent;
-      -webkit-background-clip: text;
+      background-clip: text;
 }
 
 

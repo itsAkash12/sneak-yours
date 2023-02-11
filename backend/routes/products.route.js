@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getProduct, addProduct, deleteProduct } = require("../controllers/productsController");
+const { getProduct, addProduct, deleteProduct, updateProduct } = require("../controllers/productsController");
 const roleChecker = require("../middlewares/role.middleware")
 
 const products = Router();
@@ -8,7 +8,7 @@ products.get("/", getProduct);
 products.get("/:id", getProduct);
 products.post("/add", roleChecker, addProduct)
 products.delete("/delete/:id", roleChecker, deleteProduct)
-
+products.patch("/update/:id", roleChecker, updateProduct);
 
 // products.post("/add", async (req, res) => {
 //   const photos = [...req.files.images];
