@@ -3,13 +3,15 @@ const express = require("express");
 const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 const connect = require("./config/db");
-const {users, products} = require("./routes")
+const {users, products, orders} = require("./routes")
 const authenticator = require("./middlewares/authenticator.middleware");
 const fileUpload = require("express-fileupload")
+const cookieParser = require("cookie-parser")
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload({
   useTempFiles:true,
@@ -22,6 +24,7 @@ app.get("/", (req,res)=> {
 
 app.use("/users", users);
 app.use("/products", products);
+app.use("/orders",authenticator, orders);
 
 app.listen(PORT, () => {
   connect();

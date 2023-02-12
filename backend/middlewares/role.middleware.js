@@ -1,7 +1,7 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const roleChecker = async (req, res, next) => {
-  const token = req.headers.authorization;
+  const token = req.cookies.token;
   try {
     if (!token) {
       return res.send({
