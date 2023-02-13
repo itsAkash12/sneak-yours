@@ -12,6 +12,10 @@ const registerUser = async (req, res) => {
       lastname,
       email,
       gender,
+      avatar:
+        gender === "male"
+          ? "https://res.cloudinary.com/dyv0uxpi2/image/upload/v1676217724/2289_SkVNQSBGQU1PIDEwMjgtMTIy_hmkupv.jpg"
+          : "https://res.cloudinary.com/dyv0uxpi2/image/upload/v1676217657/2289_SkVNQSBGQU1PIDEwMjgtMTEz_wf9gpj.jpg",
       password: hashPassword,
     });
     const token = jwt.sign(

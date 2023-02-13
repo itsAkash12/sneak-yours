@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: [true, "Please enter email"], unique: true },
   gender: { type: String, required: [true, "Please enter gender"] },
   role: { type: String, default: "Explorer" },
+  avatar: { type: String },
   password: { type: String, required: [true, "Please enter valid password"], minLength:8 },
 });
 
