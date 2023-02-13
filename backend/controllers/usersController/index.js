@@ -4,6 +4,7 @@ const loginUser = require("./login.controller");
 const deleteUser = require("./deleteUsers.controller");
 const updateUser = require("./updateUser.controller");
 const forgotUser = require("./forgotUser.controller");
+const logoutUser = require("./logoutUser.controller")
 
 module.exports = {
   getUsers,
@@ -11,5 +12,6 @@ module.exports = {
   loginUser,
   deleteUser,
   updateUser,
-  forgotUser
+  forgotUser,
+  logoutUser
 };

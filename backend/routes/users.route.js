@@ -1,14 +1,14 @@
 require("dotenv").config();
 const { Router } = require("express");
 const UserModel = require("../models/users.model");
-const { getUsers, registerUser, loginUser, deleteUser, updateUser, forgotUser } = require("../controllers/usersController");
+const { getUsers, registerUser, loginUser, deleteUser, updateUser, forgotUser, logoutUser } = require("../controllers/usersController");
 const { body } = require("express-validator");
 const validate = require("../middlewares/validator.middleware");
 const roleChecker = require("../middlewares/role.middleware");
 const users = Router();
 
 users.get("/", getUsers);
-users.get("/:id", getUsers);
+users.get("/get/:id", getUsers);
 users.post(
   "/register",
   validate,
@@ -22,9 +22,10 @@ users.post(
   registerUser
 );
 users.post("/login", validate, loginUser);
-users.delete("/delete/:id", roleChecker, deleteUser)
+users.delete("/delete/:id", roleChecker, deleteUser);
 users.patch("/update/:id", updateUser);
 users.get("/forgot/reset", forgotUser);
+users.get("/logout", logoutUser);
 
 
 module.exports = users;
