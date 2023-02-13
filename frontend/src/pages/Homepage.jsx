@@ -5,6 +5,7 @@ import HeroContainer from "../components/LandingPage/HeroContainer";
 import CategoryChoice from "../components/LandingPage/CategoryChoice";
 import SliderCarousel from "../components/Slider/SliderCarousel";
 import Navbar from "../components/Navbar/Navbar";
+import AdsCard from "../components/LandingPage/AdsCard";
 
 const Homepage = () => {
   const sneakersData = [
@@ -118,6 +119,7 @@ const Homepage = () => {
       <Announcement />
       <CategoryChoice />
       <SliderCarousel data={sneakersData} />
+      <AdsCard />
     </Box>
   );
 };
