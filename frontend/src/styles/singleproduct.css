@@ -1,0 +1,15 @@
+.target_box:hover{
+    background: linear-gradient(
+    140deg,
+    rgba(98, 4, 250, 1) 14%,
+    rgba(253, 29, 29, 1) 62%,
+    rgba(252, 176, 69, 1) 99%
+  );
+  background-color: white;
+  transition: 0.2s ease-out
+}
+.target_box:hover .target_image{
+    opacity: 0.9;
+    scale: 0.93;
+    transition: 0.2s ease-in
+}
