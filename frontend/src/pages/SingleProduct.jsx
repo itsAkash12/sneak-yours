@@ -8,13 +8,13 @@ const SingleProduct = () => {
   return (
     <Box>
       <Navbar />
-      <Box w="90%" margin="auto" display={"grid"} gridTemplateColumns={{
+      <Box w="95%" margin="auto" display={"grid"} gridTemplateColumns={{
           base: "repeat(1,1fr)",
           sm: "repeat(2,1fr)",
           md: "repeat(2,1fr)",
           lg: "repeat(2,1fr)",
           xl: "repeat(2,1fr)",
-        }} mt={"50px"}> 
+        }} mt={"50px"} gap="40px"> 
         <SlidingBox></SlidingBox>
         <DetailsBox></DetailsBox>
       </Box>
