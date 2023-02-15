@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   ButtonGroup,
+  Divider,
   Heading,
   Modal,
   ModalBody,
@@ -16,6 +17,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
+  StackDivider,
   Text,
   useColorModeValue,
   useDisclosure,
@@ -37,28 +39,33 @@ const DetailsBox = () => {
     setSize(0);
   };
   return (
-    <Box>
+    <Box className="details_container">
       <Box w="95%" m="auto">
         <Text
-          textAlign={"center"}
+          textAlign={"left"}
           fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }}
           color="gray.600"
         >
           Men's Shoes
         </Text>
         <Box
-          m="10px auto 5px auto"
+          m="10px auto 15px auto"
           display={"flex"}
           flexDirection="column"
           gap="10px"
+          textAlign={"left"}
         >
           <Heading className="type_text">Air Jordan 4 "Red Thunder"</Heading>
+          <Box display={"flex"} gap="20px">
           <Text
             fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }}
             fontWeight="bold"
           >
             Rs. 29,995.00
           </Text>
+          <Text fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }} color={"#F51C28"}>20% off</Text>
+          <del style={{display:"flex" , justifyContent:"center", alignItems:"center" ,fontSize: "1.2rem"}}>₹ 35,995.00</del>
+          </Box>
         </Box>
         <Box display={"flex"} flexDirection="column" gap="20px" color={"gray.700"}>
           <Text textDecoration={"underline"} textAlign="left" fontSize={"md"}>
@@ -143,28 +150,56 @@ const DetailsBox = () => {
             <Modal isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
               <ModalContent>
-                <ModalHeader>Modal Title</ModalHeader>
+                <ModalHeader textAlign={"center"}>PRODUCT DETAILS</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Aliquam saepe voluptatibus necessitatibus, officia sint in
-                  repellendus voluptate expedita! Ipsa voluptatem vel minus ex
-                  veritatis repudiandae aliquid necessitatibus iusto similique
-                  ab, quia eaque consectetur sint. Odio possimus dolor nostrum
-                  consequatur aperiam ipsum fuga nihil laborum laudantium
-                  voluptate reiciendis pariatur cupiditate blanditiis numquam
-                  eaque dicta eius ipsam provident magni, ullam laboriosam! Sit
-                  dignissimos alias ipsum! Nostrum adipisci esse quidem debitis
-                  dolores beatae, ipsa voluptas nihil repudiandae. Eaque, fugiat
-                  illum. Vero sapiente assumenda facilis natus!
+                  <Stack>
+                    <Divider></Divider>
+                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>Manufacturer :</Text>
+                      <Text>HOCHIMINH CITY , VIETNAM</Text>
+                    </Box>
+                    <Divider></Divider>
+                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>Country Origin :</Text>
+                      <Text>VIETNAM</Text>
+                    </Box>
+                    <Divider></Divider>
+                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>Imported By :</Text>
+                      <Text>Sneakyours India Pvt Ltd.</Text>
+                    </Box>
+                    <Divider></Divider>
+                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>Item Weight :</Text>
+                      <Text>0.95 Kg</Text>
+                    </Box>
+                    <Divider></Divider>
+                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>Generic Name :</Text>
+                      <Text>Shoe</Text>
+                    </Box>
+                    <Divider></Divider>
+                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>Unit of Measurement :</Text>
+                      <Text>1 pair </Text>
+                    </Box>
+                    <Divider></Divider>
+                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>Marketed By :</Text>
+                      <Text>Sneakyours India pvt Ltd.</Text>
+                    </Box>
+                    <Divider></Divider>
+                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>Article Code :</Text>
+                      <Text>556718918756</Text>
+                    </Box>
+                    <Divider></Divider>
+                  </Stack>
+                  <ModalFooter>
+                    
+                  </ModalFooter>
                 </ModalBody>
-
-                <ModalFooter>
-                  <Button colorScheme="blue" mr={3} onClick={onClose}>
-                    Close
-                  </Button>
-                  <Button variant="ghost">Secondary Action</Button>
-                </ModalFooter>
               </ModalContent>
             </Modal>
           </Box>

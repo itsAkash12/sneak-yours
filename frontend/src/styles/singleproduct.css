@@ -54,4 +54,8 @@
     .hiding_container1{
         display: block;
     }
+    .active{
+        border-width: thick;
+        border: 1px solid black;
+    }
 }

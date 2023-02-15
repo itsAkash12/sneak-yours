@@ -63,7 +63,7 @@ function SliderCarousel({data}) {
                 rate={el.rate}
                 price={el.price}
                 subTitle={el.subTitle}
-                link={"/iphoneproductpage"}
+                link={"/products"}
               />
             </Box>
           ))}

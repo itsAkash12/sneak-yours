@@ -41,7 +41,7 @@ const SlidingBox = () => {
               },
               largeImage: {
                 src: img,
-                width: 800,
+                width: 650,
                 height: 800,
               },
               enlargedImageContainerDimensions: {
