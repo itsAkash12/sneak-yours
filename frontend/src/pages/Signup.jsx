@@ -16,10 +16,14 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import {Link} from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { addUser } from "../redux/Slices/SignupUser";
 // import svg from "../assets/images/bbblurry.svg"
 
 const Signup = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  
 
   const toggle = () => {
     setOpen(!open);
