@@ -19,10 +19,19 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   const [open, setOpen] = useState(false);
-
+  const [input, setInput] = useState({
+    email:"",
+    password:""
+  })
   const toggle = () => {
     setOpen(!open);
   };
+
+  const inputHandler = (e)=> {
+    const {name,value} = e.target;
+    setInput({...input, [name]:value});
+  }
+  console.log(input);
   return (
     <Box
       className="login_container"
@@ -67,6 +76,9 @@ const Login = () => {
               type="email"
               placeholder="Enter Email"
               _placeholder={{ color: "inherit" }}
+              name="email"
+              value={input.email}
+              onChange={inputHandler}
             />
             <InputGroup>
               <Input
@@ -75,6 +87,9 @@ const Login = () => {
                 variant="flushed"
                 placeholder="Password"
                 _placeholder={{ color: "inherit" }}
+                name="password"
+              value={input.password}
+              onChange={inputHandler}
               />
               <InputRightElement>
                 <Box>

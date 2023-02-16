@@ -1,18 +1,22 @@
-import {createSlice} from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
+const initialState = {
+  isAuth: null,
+  isError: false,
+  isLoading: false,
+  isSuccess: false,
+  isMessage: null,
+};
 
-const signupSlice= createSlice({
-    name:"signup",
-    initialState:{
-        isAuth:null,
-        isError:false,
-        isLoading:false,
-        isSuccess:false,
-        isMessage:null,
-    },
-    reducers:{
-        addUser(){}
-    }
+const signupSlice = createSlice({
+  name: "signup",
+  initialState,
+  reducers: {
+    addUser() {},
+  },
+  extraReducers:{
+    
+  }
 });
 
-export const {addUser} = signupSlice.actions;
-export default signupSlice;
+export const { addUser } = signupSlice.actions;
+export default signupSlice.reducer;
