@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import {BrowserRouter} from "react-router-dom"
+import { Provider } from "react-redux";
+import { store } from "./redux/Store";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -15,13 +17,13 @@ const theme = extendTheme({
   },
 })
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <BrowserRouter>
       <ChakraProvider theme={theme}>
         <App />
       </ChakraProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </Provider>
 );
 
 

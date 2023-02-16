@@ -16,11 +16,30 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import {Link} from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { addUser } from "../redux/Slices/SignupUser";
 // import svg from "../assets/images/bbblurry.svg"
 
 const Signup = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const [input, setInput] = useState({
+    firstname:"",
+    lastname:"",
+    email:"",
+    number:"",
+    gender:"",
+    password:"",
+  })
 
+  const inputHandler= (e)=> {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInput({...input,
+      [name]:value
+    })
+  }
+  
   const toggle = () => {
     setOpen(!open);
   };
@@ -64,6 +83,9 @@ const Signup = () => {
               type="text"
               placeholder="First Name"
               _placeholder={{ color: "inherit" }}
+              name="firstname"
+              value={input.firstname}
+              onChange={inputHandler}
             />
             <Input
               paddingLeft={"10px"}
@@ -71,6 +93,9 @@ const Signup = () => {
               type="text"
               placeholder="Last Name"
               _placeholder={{ color: "inherit" }}
+              name="lastname"
+              value={input.lastname}
+              onChange={inputHandler}
             />
             <Input
               paddingLeft={"10px"}
@@ -78,6 +103,9 @@ const Signup = () => {
               type="email"
               placeholder="Enter Email"
               _placeholder={{ color: "inherit" }}
+              name="email"
+              value={input.email}
+              onChange={inputHandler}
             />
             <Input
               paddingLeft={"10px"}
@@ -85,6 +113,9 @@ const Signup = () => {
               type="tel"
               placeholder="Phone Number"
               _placeholder={{ color: "inherit" }}
+              name="number"
+              value={input.number}
+              onChange={inputHandler}
             />
             <Select
               colorScheme={"blackAlpha"}
@@ -93,6 +124,9 @@ const Signup = () => {
               placeholder="Gender"
               ml={"10px"}
               fontSize={{ base: '12px',sm:'12px', md: '14px', lg: '14px' }}
+              name="gender"
+              value={input.gender}
+              onChange={inputHandler}
             >
               <option value="male">MALE</option>
               <option value="female">FEMALE</option>
@@ -104,6 +138,9 @@ const Signup = () => {
                 variant="flushed"
                 placeholder="Password"
                 _placeholder={{ color: "inherit" }}
+                name="password"
+              value={input.password}
+              onChange={inputHandler}
               />
               <InputRightElement>
                 <Box>

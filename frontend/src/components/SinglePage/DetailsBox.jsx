@@ -31,7 +31,7 @@ const DetailsBox = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const buttonGroup = [6, 7, 8, 9, 10, 11];
   const buttonInput = (event) => {
-    setSize(event.target.innerText);
+    setSize(event.target.value);
     setFlag(true);
   };
   const clearSizeHandler = () => {
@@ -124,7 +124,7 @@ const DetailsBox = () => {
               onClick={buttonInput}
             >
               {buttonGroup.map((el) => (
-                <Button border="0.5px solid" p="5px 10px">
+                <Button value={el} border="0.5px solid" p="5px 10px">
                   {el}
                 </Button>
               ))}
