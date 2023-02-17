@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { GET_PRODUCTS, LOADING_PRODUCTS, NEXT_PRODUCTS, PREV_PRODUCTS,  } from "./product.types";
+import { GET_PRODUCTS, LOADING_PRODUCTS, NEXT_PRODUCTS, PREV_PRODUCTS, SINGLE_PRODUCTS,  } from "./product.types";
 
 
 export const setLoading=()=>({type:LOADING_PRODUCTS})
@@ -13,6 +13,17 @@ export const getProducts = (page)=> async(dispatch)=> {
         let res = await fetch(`${process.env.REACT_APP_BASEURL}products?page=${page}`);
         let data = await res.json();
         return dispatch({type:GET_PRODUCTS, payload:data})
+    } catch (error) {
+        return error
+    }
+}
+
+export const getSingleProduct = (id)=> async(dispatch)=> {
+    dispatch(setLoading({type:LOADING_PRODUCTS}));
+    try {
+        let res = await fetch (`${process.env.REACT_APP_BASEURL}products/${id}`);
+        let data = await res.json();
+        return dispatch({type:SINGLE_PRODUCTS, payload:data})
     } catch (error) {
         return error
     }

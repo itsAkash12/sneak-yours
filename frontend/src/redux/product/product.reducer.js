@@ -1,9 +1,10 @@
-import { GET_PRODUCTS, LOADING_PRODUCTS, NEXT_PRODUCTS, PREV_PRODUCTS,  } from "./product.types"
+import { GET_PRODUCTS, LOADING_PRODUCTS, NEXT_PRODUCTS, PREV_PRODUCTS, SINGLE_PRODUCTS,  } from "./product.types"
 
 const initialState = {
     products:[],
     loading:false,
-    page:1
+    page:1,
+    singleProduct:[]
 }
 
 const productReducer = (state=initialState, {type,payload})=>{
@@ -31,6 +32,13 @@ const productReducer = (state=initialState, {type,payload})=>{
             return {
                 ...state,
                 page:state.page-payload
+            }
+        }
+        case SINGLE_PRODUCTS:{
+            return {
+                ...state,
+                loading:false,
+                singleProduct:[payload]
             }
         }
         default:{
