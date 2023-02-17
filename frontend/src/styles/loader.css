@@ -49,3 +49,19 @@
       transform: rotate(0deg);
     }
   }
+  .loader_container{
+    width:45%;
+    display: flex;
+    align-items: center;
+  }
+
+  
+@media screen and (min-width: 200px) and (max-width: 475px){
+  .loader_container{
+    width: 90%;
+    margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+}

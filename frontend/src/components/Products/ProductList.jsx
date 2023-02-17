@@ -13,6 +13,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -20,9 +21,9 @@ import Loader from "../../pages/Loader";
 import "../../styles/products.css";
 import DrawerFilter from "./DrawerFilter";
 
-const ProductList = ({products}) => {
-  const {loading}= useSelector((store)=> store.product)
-  console.log(loading);
+const ProductList = ({ products }) => {
+  const { loading } = useSelector((store) => store.product);
+  const [image, setImage]= useState(false);
   return (
     <Box
       className="product_container"
@@ -90,8 +91,16 @@ const ProductList = ({products}) => {
             products.map((el) => (
               <GridItem key={el._id}>
                 <Link to="/single">
-                  <Image src={el.images[0].url}></Image>
-                  <Text>{el.product_title}</Text>
+                  <div className="card">
+                    <div className="card2">
+                      <Image src={el.images[1].url}></Image>
+                      <Box mt={"3px"}>
+                        <Text color={"gray.600"}>{el.brand}</Text>
+                        <Text fontWeight={"bold"}>{(el.product_title).toUpperCase()}</Text>
+                        <Text>₹{parseFloat(el.price).toLocaleString()}.00</Text>
+                      </Box>
+                    </div>
+                  </div>
                 </Link>
               </GridItem>
             ))}

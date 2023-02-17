@@ -4,7 +4,7 @@ import "../styles/loader.css"
 
 const Loader = () => {
   return (
-    <Box w={"50%"} h="100vh" display={"flex"} alignItems="center">
+    <Box h="100vh" className='loader_container'>
       <Box className="loader"></Box>
     </Box>
   )
