@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonGroup,
   Flex,
   Grid,
   GridItem,
@@ -13,17 +14,24 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { IoIosArrowDown, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loader from "../../pages/Loader";
+import { setNextPage, setPrevPage } from "../../redux/product/product.actions";
 import "../../styles/products.css";
 import DrawerFilter from "./DrawerFilter";
 
 const ProductList = ({ products }) => {
-  const { loading } = useSelector((store) => store.product);
-  const [image, setImage]= useState(false);
+  const { loading, page } = useSelector((store) => store.product);
+  const dispatch = useDispatch();
+  console.log(products.length)
+  const prevPageHandler=()=> {
+    dispatch(setPrevPage(1))
+  }
+  const nextPageHandler = ()=> {
+    dispatch(setNextPage(1))
+  }
   return (
     <Box
       className="product_container"
@@ -90,7 +98,7 @@ const ProductList = ({ products }) => {
           {products &&
             products.map((el) => (
               <GridItem key={el._id}>
-                <Link to="/single">
+                <Link to={`/single/${el._id}`}>
                   <div className="card">
                     <div className="card2">
                       <Image src={el.images[1].url}></Image>
@@ -105,6 +113,13 @@ const ProductList = ({ products }) => {
               </GridItem>
             ))}
         </Grid>
+      </Box>
+      <Box display={"flex"} justifyContent="center" alignItems={"center"}>
+        <ButtonGroup>
+          <Button isDisabled={page==1} onClick={prevPageHandler}><IoIosArrowBack fontSize={"25px"}></IoIosArrowBack></Button>
+          <Text fontSize={"lg"} fontWeight="bold" mt={"5px"}>{page}</Text>
+          <Button isDisabled={page==6} onClick={nextPageHandler}><IoIosArrowForward fontSize={"25px"}></IoIosArrowForward></Button>
+        </ButtonGroup>
       </Box>
     </Box>
   );
