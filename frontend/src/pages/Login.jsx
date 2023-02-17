@@ -20,17 +20,17 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState({
-    email:"",
-    password:""
-  })
+    email: "",
+    password: "",
+  });
   const toggle = () => {
     setOpen(!open);
   };
 
-  const inputHandler = (e)=> {
-    const {name,value} = e.target;
-    setInput({...input, [name]:value});
-  }
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
   console.log(input);
   return (
     <Box
@@ -38,10 +38,10 @@ const Login = () => {
       display={"flex"}
       justifyContent="center"
       alignItems={"center"}
-      paddingBottom={{ base: '120px',sm:'100px', md: '50px', lg: '50px' }}
+      paddingBottom={{ base: "120px", sm: "100px", md: "50px", lg: "50px" }}
     >
       <Box
-        width={{ base: '80%',sm:'50%', md: '50%', lg: '35%' }}
+        width={{ base: "80%", sm: "50%", md: "50%", lg: "35%" }}
         bg="blackAlpha.500"
         backdropFilter="blur(20px)"
         border={"1px solid white"}
@@ -69,49 +69,55 @@ const Login = () => {
             WELCOME !!
           </Text>
           <Text color={"white"}>TO THE WORLD OF SNEAKERS</Text>
-          <Stack color="white" p={"0px 25px"} mt="20px">
-            <Input
-              paddingLeft={"10px"}
-              variant="flushed"
-              type="email"
-              placeholder="Enter Email"
-              _placeholder={{ color: "inherit" }}
-              name="email"
-              value={input.email}
-              onChange={inputHandler}
-            />
-            <InputGroup>
+          <form action="">
+            <Stack color="white" p={"0px 25px"} mt="20px">
               <Input
-                type={open === false ? "password" : "text"}
                 paddingLeft={"10px"}
                 variant="flushed"
-                placeholder="Password"
+                type="email"
+                placeholder="Enter Email"
                 _placeholder={{ color: "inherit" }}
-                name="password"
-              value={input.password}
-              onChange={inputHandler}
+                name="email"
+                value={input.email}
+                onChange={inputHandler}
+                required
               />
-              <InputRightElement>
-                <Box>
-                  {open === false ? (
-                    <AiOutlineEyeInvisible onClick={toggle} />
-                  ) : (
-                    <AiOutlineEye onClick={toggle} />
-                  )}
-                </Box>
-              </InputRightElement>
-            </InputGroup>
-          </Stack>
-          <Box mt={"20px"}>
-            <Button
-              bg={"black"}
-              w="50%"
-              color="white"
-              _hover={{ bg: "white", color: "black" }}
-            >
-              SIGN IN
-            </Button>
-          </Box>
+              <InputGroup>
+                <Input
+                  type={open === false ? "password" : "text"}
+                  paddingLeft={"10px"}
+                  variant="flushed"
+                  placeholder="Password"
+                  _placeholder={{ color: "inherit" }}
+                  name="password"
+                  value={input.password}
+                  onChange={inputHandler}
+                  required
+                />
+                <InputRightElement>
+                  <Box>
+                    {open === false ? (
+                      <AiOutlineEyeInvisible onClick={toggle} />
+                    ) : (
+                      <AiOutlineEye onClick={toggle} />
+                    )}
+                  </Box>
+                </InputRightElement>
+              </InputGroup>
+            </Stack>
+            <Box mt={"20px"}>
+              <Button
+                bg={"black"}
+                w="50%"
+                color="white"
+                _hover={{ bg: "white", color: "black" }}
+                type="submit"
+              >
+                SIGN IN
+              </Button>
+            </Box>
+          </form>
+
           <Box
             mt={"20px"}
             display="flex"
@@ -126,7 +132,7 @@ const Login = () => {
               _hover={{ bg: "#e2e6eb", color: "black" }}
               leftIcon={<FcGoogle fontSize={"20px"} />}
               textColor={"black"}
-              fontSize={{ base: '12px',sm:'12px', md: '14px', lg: '14px' }}
+              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
               w="80%"
             >
               Sign Up with Google
@@ -137,7 +143,7 @@ const Login = () => {
               _hover={{ bg: "#e2e6eb" }}
               leftIcon={<FaGithub fontSize={"20px"} />}
               textColor={"#black"}
-              fontSize={{ base: '12px',sm:'12px', md: '14px', lg: '14px' }}
+              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
               w="80%"
             >
               Sign Up with GitHub
