@@ -8,7 +8,6 @@ export const setPrevPage=(payload = 1)=>({type:PREV_PRODUCTS, payload})
 
 
 export const getProducts = (page)=> async(dispatch)=> {
-    console.log(page);
     dispatch(setLoading({type:LOADING_PRODUCTS}));
     try {
         let res = await fetch(`${process.env.REACT_APP_BASEURL}products?page=${page}`);

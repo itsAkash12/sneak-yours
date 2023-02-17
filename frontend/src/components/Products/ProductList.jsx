@@ -17,15 +17,13 @@ import React from "react";
 import { IoIosArrowDown, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Loader from "../../pages/Loader";
 import { setNextPage, setPrevPage } from "../../redux/product/product.actions";
 import "../../styles/products.css";
 import DrawerFilter from "./DrawerFilter";
 
 const ProductList = ({ products }) => {
-  const { loading, page } = useSelector((store) => store.product);
+  const { page } = useSelector((store) => store.product);
   const dispatch = useDispatch();
-  console.log(products.length)
   const prevPageHandler=()=> {
     dispatch(setPrevPage(1))
   }
