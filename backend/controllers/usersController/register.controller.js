@@ -35,6 +35,7 @@ const registerUser = async (req, res) => {
       message: "success",
       description: "User Created Successfully",
       token,
+      user
     });
   } catch (error) {
     res.send({ message: "failed", description: error.message });

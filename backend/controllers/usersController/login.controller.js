@@ -31,15 +31,16 @@ const loginUser = async (req, res) => {
           message: "success",
           description: "Logged In Successfully",
           token,
+          user
         });
       } else {
-        return res.status(401).send({ message: "failure", description: "Wrong Credentials" });
+        return res.status(401).send({ message: "failed", description: "Wrong Credentials" });
       }
     } else {
-      return res.status(401).send({ message: "failure", description: "Invalid Credentials" });
+      return res.status(401).send({ message: "failed", description: "Invalid Credentials" });
     }
   } catch (error) {
-    return res.status(401).send({ message: "failure", description: error.message });
+    return res.status(401).send({ message: "failed", description: error.message });
   }
 };
 
