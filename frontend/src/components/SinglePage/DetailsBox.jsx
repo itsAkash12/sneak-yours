@@ -25,7 +25,8 @@ import {
 import React from "react";
 import { useState } from "react";
 
-const DetailsBox = () => {
+const DetailsBox = ({element}) => {
+  console.log(element);
   const [flag, setFlag] = useState(false);
   const [size, setSize] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,6 +39,7 @@ const DetailsBox = () => {
     setFlag(false);
     setSize(0);
   };
+  const strikePrice = element.price * element.discount/100
   return (
     <Box className="details_container">
       <Box w="95%" m="auto">
@@ -46,7 +48,7 @@ const DetailsBox = () => {
           fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }}
           color="gray.600"
         >
-          Men's Shoes
+          {element.subtitle}
         </Text>
         <Box
           m="10px auto 15px auto"
@@ -55,16 +57,16 @@ const DetailsBox = () => {
           gap="10px"
           textAlign={"left"}
         >
-          <Heading className="type_text">Air Jordan 4 "Red Thunder"</Heading>
+          <Heading className="type_text">{element.product_title}</Heading>
           <Box display={"flex"} gap="20px">
           <Text
             fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }}
             fontWeight="bold"
           >
-            Rs. 29,995.00
+            ₹{parseFloat(element.price).toLocaleString()}.00
           </Text>
-          <Text fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }} color={"#F51C28"}>20% off</Text>
-          <del style={{display:"flex" , justifyContent:"center", alignItems:"center" ,fontSize: "1.2rem"}}>₹ 35,995.00</del>
+          <Text fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }} color={"#F51C28"}>{`${element.discount}% off`}</Text>
+          <del style={{display:"flex" , justifyContent:"center", alignItems:"center" ,fontSize: "1.2rem"}}>{`₹ ${parseFloat(element.price + strikePrice).toLocaleString()}.00`}</del>
           </Box>
         </Box>
         <Box display={"flex"} flexDirection="column" gap="20px" color={"gray.700"}>
@@ -93,7 +95,7 @@ const DetailsBox = () => {
                     <Text
                       fontSize={{ base: "lg", md: "xl", lg: "xl", xl: "xl" }}
                     >
-                      {"The Air Jordan 4 'Red Thunder'"}...
+                      {element.product_title}...
                     </Text>
                     <Text
                       fontSize={{ base: "lg", md: "xl", lg: "xl", xl: "xl" }}
@@ -105,10 +107,7 @@ const DetailsBox = () => {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                {element.description}
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
@@ -167,7 +166,7 @@ const DetailsBox = () => {
                     <Divider></Divider>
                     <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
                       <Text letterSpacing={"1px"} fontWeight={"600"}>Imported By :</Text>
-                      <Text>Sneakyours India Pvt Ltd.</Text>
+                      <Text>{`${element.seller_name}, ${element.seller_address}`}</Text>
                     </Box>
                     <Divider></Divider>
                     <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
@@ -177,7 +176,7 @@ const DetailsBox = () => {
                     <Divider></Divider>
                     <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
                       <Text letterSpacing={"1px"} fontWeight={"600"}>Generic Name :</Text>
-                      <Text>Shoe</Text>
+                      <Text>{element.subtitle}</Text>
                     </Box>
                     <Divider></Divider>
                     <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
@@ -192,7 +191,7 @@ const DetailsBox = () => {
                     <Divider></Divider>
                     <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
                       <Text letterSpacing={"1px"} fontWeight={"600"}>Article Code :</Text>
-                      <Text>556718918756</Text>
+                      <Text>{(element._id).toUpperCase()}</Text>
                     </Box>
                     <Divider></Divider>
                   </Stack>

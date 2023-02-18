@@ -63,7 +63,7 @@ const SlidingBox = ({images}) => {
                 onMouseOver={() => hoverHandler(el, i)}
                 className={i == 0 ? "target_box active" : "target_box"}
                 ref={addRefs}
-                key={el.id}
+                key={el.url}
               >
                 <Image className="target_image" src={el.url}></Image>
               </Box>
