@@ -8,8 +8,16 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/SneakYours.png";
@@ -18,8 +26,11 @@ import { BsFillCartFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import InputSearch from "./InputSearch";
 import "../../styles/navbar.css";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const WebNavbar = () => {
+  const toast = useToast();
   const navigate = useNavigate();
   const [scrollTop, setScrollTop] = useState(0);
   const [height, setHeight] = useState(0);
@@ -43,6 +54,22 @@ const WebNavbar = () => {
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
   }, []);
+  const name = cookies.get("name");
+  const role = cookies.get("role");
+  const handleLogout = ()=> {
+    cookies.remove("jwtoken")
+    cookies.remove("name")
+    cookies.remove("role")
+    toast({
+      title: 'Success',
+      description: "Logged out Successfull",
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      position:"top"
+    })
+    window.location.reload(false);
+  }
   return (
     <Box className="web_navbar_container">
       <Flex objectFit={"cover"} justify={"space-around"} alignItems="center">
@@ -165,11 +192,65 @@ const WebNavbar = () => {
           alignItems="center"
           gap={"30px"}
         >
-          <Link to={"/login"}>
-            <Text fontSize={"20px"} color="white">
-              LOGIN
-            </Text>
-          </Link>
+         {name ? (
+            <Popover>
+              <PopoverTrigger>
+                  <Text fontSize="20px" color={"white"} >
+                    {(name).toUpperCase()}
+                  </Text>
+              </PopoverTrigger>
+              <PopoverContent>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverHeader>Hello {name} !</PopoverHeader>
+                <PopoverBody display={"grid"} gap="10px">
+                  {
+                    role === "Admin" ? <Button bg={"#6104FA"} _hover={""}
+                    color={"white"}
+                    size={"sm"}
+                    letterSpacing="1px"
+                    onClick={()=> navigate("/admin")} >Admin Panel</Button> : <Box></Box>
+                  }
+                  <Button
+                    size={"sm"}
+                    color={"white"}
+                    bg={"red"} _hover={""}
+                    letterSpacing="1px"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Button>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+          ) : (
+            <Popover>
+              <PopoverTrigger>
+                <Box>
+                  <Text fontSize="20px" color={"white"}>
+                    LOGIN
+                  </Text>
+                </Box>
+              </PopoverTrigger>
+              <PopoverContent>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverHeader>Hello Guest!</PopoverHeader>
+                <PopoverBody>
+                  <Button
+                    size={"sm"}
+                    colorScheme="green"
+                    color={"white"}
+                    letterSpacing="1px"
+                    bg="#6104FA"
+                    onClick={() => navigate("/login")}
+                  >
+                    Login
+                  </Button>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+          )} 
           <Link to={"/cart"}>
             <Box position={"relative"}>
               <BsFillCartFill fontSize={"28px"} color="white" />

@@ -9,16 +9,50 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/login.css";
 import logo from "../assets/images/SneakYours.png";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, loginAuth } from "../redux/auth/auth.actions";
+import { useToast } from '@chakra-ui/react'
+import { CLEAR_ERROR } from "../redux/auth/auth.actionTypes";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const toast = useToast()
   const [open, setOpen] = useState(false);
+  const {isLoading,isAuth,token,message,isError} = useSelector((store)=> store.auth);
+  useEffect(()=> {
+    if(token){
+      navigate("/")
+    }
+    if(isError){
+      toast({
+        title: 'Error',
+        description: message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position:"top"
+      })
+      dispatch(clearErrors());
+    }
+    if(isAuth){
+      toast({
+        title: 'Success',
+        description: message,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position:"top"
+      })
+    }
+  },[isAuth, isError])
+  const dispatch = useDispatch();
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -31,7 +65,25 @@ const Login = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-  console.log(input);
+  const loginHandler =(e)=> {
+    e.preventDefault();
+    if(input.email =="" || input.password == ""){
+      return toast({
+        title: 'Empty Credentials',
+        description: "Please fill all the necessary Fields",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position:"top"
+      })
+    }
+    dispatch(loginAuth(input))
+    setInput({
+      email: "",
+      password: "",
+    })
+  }
+
   return (
     <Box
       className="login_container"
@@ -112,6 +164,7 @@ const Login = () => {
                 color="white"
                 _hover={{ bg: "white", color: "black" }}
                 type="submit"
+                onClick={loginHandler}
               >
                 SIGN IN
               </Button>

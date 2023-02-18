@@ -16,12 +16,35 @@ import logo from "../assets/images/SneakYours.png";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, signupAuth } from "../redux/auth/auth.actions";
+import { useToast } from '@chakra-ui/react'
+
 
 const Signup = () => {
+  const toast = useToast();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const {isLoading,isAuth,token,message,isError} = useSelector((store)=> store.auth);
+  useEffect(()=> {
+    if(token){
+      navigate("/")
+    }
+    if(isError){
+      toast({
+        title: 'Error',
+        description: message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position:"top"
+      })
+      dispatch(clearErrors())
+    }
+  },[isAuth,isError])
   const dispatch = useDispatch();
+  
   const [input, setInput] = useState({
     firstname: "",
     lastname: "",
@@ -43,8 +66,27 @@ const Signup = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    
+    if(input.firstname == "" || input.lastname == "" || input.email =="" || input.number == "" || input.gender == "" || input.password == ""){
+      return toast({
+        title: 'Empty Credentials',
+        description: "Please fill all the necessary Fields",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position:"top"
+      })
+    }
+    dispatch(signupAuth(input))
+    setInput({
+      firstname: "",
+      lastname: "",
+      email: "",
+      number: "",
+      gender: "",
+      password: "",
+    })
   };
+  
   
   return (
     <Box
