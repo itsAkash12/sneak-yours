@@ -1,4 +1,4 @@
-const sendEmail = require("../../utils/SendEmail");
+const sendEmail = require("../../utils/sendEmail");
 
 const forgotUser = async (req, res) => {
   const message = "hello there";
