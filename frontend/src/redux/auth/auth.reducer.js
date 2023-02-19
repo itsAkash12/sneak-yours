@@ -6,7 +6,7 @@ const token = cookies.get("jwtoken")
 
 
 const initialState={
-    isAuth:token ? true : false,
+    isAuth:false,
     token: token || "",
     isLoading:false,
     message:"",

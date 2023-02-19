@@ -8,7 +8,6 @@ const roleChecker = require("../middlewares/role.middleware");
 const users = Router();
 
 users.get("/", getUsers);
-users.get("/get/:id", getUsers);
 users.post(
   "/register",
   [
@@ -19,9 +18,10 @@ users.post(
     body("password", "Please enter your password").not().isEmpty(),
   ],
   registerUser
-);
-users.post("/login", validate, loginUser);
-users.delete("/delete/:id", roleChecker, deleteUser);
+  );
+  users.post("/login", validate, loginUser);
+  users.get("/get/:id", getUsers);
+  users.delete("/delete/:id", roleChecker, deleteUser);
 users.patch("/update/:id", updateUser);
 users.get("/forgot/reset", forgotUser);
 users.get("/logout", logoutUser);

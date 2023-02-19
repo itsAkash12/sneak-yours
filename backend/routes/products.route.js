@@ -5,8 +5,8 @@ const roleChecker = require("../middlewares/role.middleware")
 const products = Router();
 
 products.get("/", getProduct);
-products.get("/:id", getProduct);
 products.post("/add", roleChecker, addProduct)
+products.get("/:id", getProduct);
 products.delete("/delete/:id", roleChecker, deleteProduct)
 products.patch("/update/:id", roleChecker, updateProduct);
 
