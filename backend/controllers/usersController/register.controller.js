@@ -23,15 +23,9 @@ const registerUser = async (req, res) => {
       process.env.SECRET_KEY,
       { expiresIn: "2 days" }
     );
-    const options = {
-      expires: new Date(
-        Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-      ),
-      httpOnly: true,
-    };
 
     await user.save();
-    res.status(200).cookie("token", token, options).send({
+    res.status(200).send({
       message: "success",
       description: "Successfully Registered to Sneakyours World",
       token,
