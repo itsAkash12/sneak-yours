@@ -33,7 +33,7 @@ const registerUser = async (req, res) => {
     await user.save();
     res.status(200).cookie("token", token, options).send({
       message: "success",
-      description: "User Created Successfully",
+      description: "Successfully Registered to Sneakyours World",
       token,
       user
     });

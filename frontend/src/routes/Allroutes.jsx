@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
+import Cartpage from "../pages/Cartpage";
 import Homepage from "../pages/Homepage";
 import Loader from "../pages/Loader";
 import Login from "../pages/Login";
@@ -19,6 +20,7 @@ const Allroutes = () => {
         <Route path="/products" element={<Productspage />} />
         <Route path="/single/:id" element={<SingleProduct />} />
         <Route path="/loader" element={<Loader />} />
+        <Route path="/cart" element={<Cartpage />} />
       </Routes>
     </Box>
   );
