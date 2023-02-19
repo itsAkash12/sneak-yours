@@ -50,6 +50,7 @@ const Login = () => {
         isClosable: true,
         position:"top"
       })
+      dispatch(clearErrors());
     }
   },[isAuth, isError])
   const dispatch = useDispatch();
