@@ -1,4 +1,4 @@
-import { CLEAR_ERRORS_CART, ERRORS_GET, GET_CART, LOADING_CART } from "./cart.types";
+import { ADD_TO_CART, ADD_TO_CART_ERROR, CLEAR_ERRORS_CART, DEC_QUANTITY, DELETE_CART, ERRORS_GET, GET_CART, INC_QUANTITY, LOADING_CART, QUANTITY_ERROR } from "./cart.types";
 
 const initialState = {
     carts:[],
@@ -26,8 +26,54 @@ const cartReducer = (state=initialState, {type,payload})=> {
         }
         case ERRORS_GET:{
             return{
+                ...state,
                 isLoading:false,
                 isError:true,
+                message:payload
+            }
+        }
+        case INC_QUANTITY:{
+            return{
+                ...state,
+                isLoading:false,
+                isSuccess:true,
+                message:payload
+            }
+        }
+        case DEC_QUANTITY:{
+            return{
+                ...state,
+                isLoading:false,
+                isSuccess:true,
+                message:payload
+            }
+        }
+        case QUANTITY_ERROR:{
+            return{
+                ...state,
+                isLoading:false,
+                isError:true,
+                message:payload
+            }
+        }
+        case ADD_TO_CART:{
+            return{
+                ...state,
+                isSuccess:true,
+                message:payload
+            }
+        }
+        case ADD_TO_CART_ERROR:{
+            return{
+                ...state,
+                isError:true,
+                message:payload
+            }
+        }
+        case DELETE_CART:{
+            return{
+                ...state,
+                isSuccess:true,
                 message:payload
             }
         }

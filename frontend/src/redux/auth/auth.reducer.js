@@ -45,6 +45,7 @@ const authReducer = (state = initialState, {type, payload})=> {
         }
         case CLEAR_ERROR:{
             return {
+                ...state,
                 message:null
             }
         }

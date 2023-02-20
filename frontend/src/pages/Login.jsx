@@ -18,41 +18,43 @@ import { FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, loginAuth } from "../redux/auth/auth.actions";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
 import { CLEAR_ERROR } from "../redux/auth/auth.actionTypes";
 
 const Login = () => {
   const navigate = useNavigate();
-  const toast = useToast()
+  const toast = useToast();
   const [open, setOpen] = useState(false);
-  const {isLoading,isAuth,token,message,isError} = useSelector((store)=> store.auth);
-  useEffect(()=> {
-    if(token){
-      navigate("/")
+  const { isLoading, isAuth, token, message, isError } = useSelector(
+    (store) => store.auth
+  );
+  useEffect(() => {
+    if (token) {
+      navigate("/");
     }
-    if(isError){
+    if (isError) {
       toast({
-        title: 'Error',
+        title: "Error",
         description: message,
-        status: 'error',
+        status: "error",
         duration: 3000,
         isClosable: true,
-        position:"top"
-      })
+        position: "top",
+      });
       dispatch(clearErrors());
     }
-    if(isAuth){
+    if (isAuth) {
       toast({
-        title: 'Success',
+        title: "Success",
         description: message,
-        status: 'success',
+        status: "success",
         duration: 3000,
         isClosable: true,
-        position:"top"
-      })
+        position: "top",
+      });
       dispatch(clearErrors());
     }
-  },[isAuth, isError])
+  }, [isAuth, isError]);
   const dispatch = useDispatch();
   const [input, setInput] = useState({
     email: "",
@@ -66,24 +68,24 @@ const Login = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-  const loginHandler =(e)=> {
+  const loginHandler = (e) => {
     e.preventDefault();
-    if(input.email =="" || input.password == ""){
+    if (input.email == "" || input.password == "") {
       return toast({
-        title: 'Empty Credentials',
+        title: "Empty Credentials",
         description: "Please fill all the necessary Fields",
-        status: 'error',
+        status: "error",
         duration: 3000,
         isClosable: true,
-        position:"top"
-      })
+        position: "top",
+      });
     }
-    dispatch(loginAuth(input))
+    dispatch(loginAuth(input));
     setInput({
       email: "",
       password: "",
-    })
-  }
+    });
+  };
 
   return (
     <Box
@@ -159,16 +161,33 @@ const Login = () => {
               </InputGroup>
             </Stack>
             <Box mt={"20px"}>
-              <Button
-                bg={"black"}
-                w="50%"
-                color="white"
-                _hover={{ bg: "white", color: "black" }}
-                type="submit"
-                onClick={loginHandler}
-              >
-                SIGN IN
-              </Button>
+              {isLoading ? (
+                <Button
+                  bg={"black"}
+                  isLoading
+                  loadingText="Logging in"
+                  w="50%"
+                  color="white"
+                  _hover={{ bg: "white", color: "black" }}
+                  type="submit"
+                  onClick={loginHandler}
+                >
+                  SIGN IN
+                </Button>
+              ) : (
+                <Button
+                  bg={"black"}
+                  // isLoading
+                  // loadingText="Logging in"
+                  w="50%"
+                  color="white"
+                  _hover={{ bg: "white", color: "black" }}
+                  type="submit"
+                  onClick={loginHandler}
+                >
+                  SIGN IN
+                </Button>
+              )}
             </Box>
           </form>
 

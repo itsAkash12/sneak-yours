@@ -4,7 +4,7 @@ import CartCard from "./CartCard";
 import "../../styles/cartpage.css";
 import { useSelector } from "react-redux";
 
-const CartItems = () => {
+const CartItems = ({toggle}) => {
   const {carts} = useSelector((store) => store.cart);
   return (
     <Box>
@@ -15,7 +15,7 @@ const CartItems = () => {
         gridTemplateColumns="repeat(1,1fr)"
         gap={"20px"}
       >
-        {carts && carts.map((ele) => <CartCard title={ele.prodId.product_title} image={ele.prodId.images} price={ele.prodId.price}></CartCard>)}
+        {carts && carts.map((ele) => <CartCard title={ele.prodId.product_title} image={ele.prodId.images} price={ele.prodId.price} quan={ele.quantity} quantity={ele.prodId.quantity} cartId={ele._id} toggle={toggle}></CartCard>)}
       </Box>
     </Box>
   );

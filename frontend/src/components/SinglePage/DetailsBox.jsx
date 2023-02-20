@@ -24,9 +24,13 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
+import { addToCart } from "../../redux/cart/cart.actions";
 
 const DetailsBox = ({element}) => {
-  console.log(element);
+  const dispatch = useDispatch();
+  const cookies = new Cookies();
   const [flag, setFlag] = useState(false);
   const [size, setSize] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,6 +44,20 @@ const DetailsBox = ({element}) => {
     setSize(0);
   };
   const strikePrice = element.price * element.discount/100
+
+  const handleAddtoCart=(prodId) => {
+    const token = cookies.get("jwtoken") || null;
+    if(!token){
+      return alert("Please login")
+    }
+    else{
+      if(size=="6" || size == "7" || size =="8" || size =="9" || size == "10" || size == "11"){
+        dispatch(addToCart(prodId, token))
+      }else{
+        return alert("please select size")
+      }
+    }
+  }
   return (
     <Box className="details_container">
       <Box w="95%" m="auto">
@@ -234,6 +252,7 @@ const DetailsBox = ({element}) => {
                 backgroundColor:"gray.900",
                 color:'white'
               }}
+              onClick={()=>handleAddtoCart(element._id)}
             >
               Add to cart
             </Button>

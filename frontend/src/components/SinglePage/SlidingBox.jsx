@@ -5,7 +5,6 @@ import "../../styles/singleproduct.css";
 import ReactImageMagnify from "react-image-magnify";
 
 const SlidingBox = ({images}) => {
-  console.log(images)
   const [img, setImg] = useState(images[0].url);
   useEffect(() => {
     setImg(images[0].url)

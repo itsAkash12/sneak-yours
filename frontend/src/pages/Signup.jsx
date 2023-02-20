@@ -53,7 +53,7 @@ const Signup = () => {
       });
       dispatch(clearErrors());
     }
-    if(isAuth){
+    if (isAuth) {
       toast({
         title: "Registration Success",
         description: message,
@@ -295,16 +295,31 @@ const Signup = () => {
               </Text>
             </Stack>
             <Box mt={"20px"}>
-              <Button
-                w="50%"
-                bg={"black"}
-                color="white"
-                _hover={{ bg: "white", color: "black" }}
-                onClick={submitHandler}
-                type="submit"
-              >
-                JOIN US
-              </Button>
+              {isLoading ? (
+                <Button
+                  w="50%"
+                  isLoading
+                  loadingText="registering"
+                  bg={"black"}
+                  color="white"
+                  _hover={{ bg: "white", color: "black" }}
+                  onClick={submitHandler}
+                  type="submit"
+                >
+                  JOIN US
+                </Button>
+              ) : (
+                <Button
+                  w="50%"
+                  bg={"black"}
+                  color="white"
+                  _hover={{ bg: "white", color: "black" }}
+                  onClick={submitHandler}
+                  type="submit"
+                >
+                  JOIN US
+                </Button>
+              )}
             </Box>
           </form>
           <Box

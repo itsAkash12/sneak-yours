@@ -16,8 +16,6 @@ const SingleProduct = () => {
     dispatch(getSingleProduct(id));
   }, [id]);
 
-  console.log(singleProduct);
-
   return (
     <Box>
       <Navbar />
