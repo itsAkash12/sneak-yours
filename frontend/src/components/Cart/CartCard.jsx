@@ -3,7 +3,8 @@ import React from "react";
 import {ImCross} from "react-icons/im"
 import "../../styles/cartpage.css"
 
-const CartCard = () => {
+const CartCard = ({title, image, price}) => {
+  console.log(image,title,price);
   return (
     <Box
       w={"95%"}
@@ -16,10 +17,10 @@ const CartCard = () => {
         border={"1px solid grey"}
         borderTopLeftRadius={"15px"}
         borderBottomRightRadius={"15px"}
-        src="https://res.cloudinary.com/dyv0uxpi2/image/upload/v1675268194/jakugjmugjqv9hiujpm4.jpg"
+        src={image[0].url}
       />
-      <Text fontSize={{base:"xs", md:"sm", lg:"sm" , xl:"md" }}>WMN’S RUN STAR MOTION CX PLATFORM ‘RUST PINK’</Text>
-      <Text fontSize={{base:"xs", md:"sm", lg:"sm" , xl:"md" }}>Rs. 29,995.00
+      <Text fontSize={{base:"xs", md:"sm", lg:"sm" , xl:"md" }}>{title}</Text>
+      <Text fontSize={{base:"xs", md:"sm", lg:"sm" , xl:"md" }}>{`₹${parseFloat(price).toLocaleString()}.00`}
 </Text>
       <Select w={"60px"}>
         <option value="1">1</option>

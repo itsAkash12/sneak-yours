@@ -1,6 +1,6 @@
 .cart_card {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border: 2px solid;
     border-image: linear-gradient(
