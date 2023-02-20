@@ -11,17 +11,20 @@ const authenticator = async (req, res, next) => {
         next();
       } else {
         res.send({
-          message: "You are not authorized for this action. Please Login again",
+          message:"failed",
+          description: "You are not authorized for this action. Please Login again",
         });
       }
     } else {
       res.send({
-        message: "You are not authorized for this action. Please Login again",
+        message:"failed",
+        description: "You are not authorized for this action. Please Login again",
       });
     }
   } catch (error) {
     res.send({
-      message: "You are not authorized for this action. Please Login again",
+      message:"failed",
+      description: "You are not authorized for this action. Please Login again",
     });
   }
 };
