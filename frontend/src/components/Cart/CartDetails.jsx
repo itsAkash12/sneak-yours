@@ -7,10 +7,6 @@ const CartDetails = () => {
   const {carts} = useSelector((store) => store.cart);
   const [tax, setTax]= useState(500);
   const [coupon, setCoupon]= useState(0);
-  var price = 0;
-  for(let i=0;i<carts.lenght; i++){
-    price += carts[i].prodId.price * carts[i].quantity
-  }
   console.log(price);
   return (
     <Box>
