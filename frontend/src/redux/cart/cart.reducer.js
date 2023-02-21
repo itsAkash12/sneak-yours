@@ -2,6 +2,7 @@ import { ADD_TO_CART, ADD_TO_CART_ERROR, CLEAR_ERRORS, DEC_QUANTITY, DELETE_CART
 
 const initialState = {
     carts:[],
+    cartCount:'',
     isLoading:false,
     message:"",
     isError:false,
@@ -21,7 +22,8 @@ const cartReducer = (state=initialState, {type,payload})=> {
         case GET_CART:{
             return{
                 ...state,
-                carts:payload,
+                carts:payload.cart,
+                cartCount:payload.cartCount,
                 isLoading:false,
             }
         }

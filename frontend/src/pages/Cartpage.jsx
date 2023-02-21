@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar/Navbar";
 import CartDetails from "../components/Cart/CartDetails";
 import CartItems from "../components/Cart/CartItems";
 import "../styles/cartpage.css";
-import { getCart, loadingCart } from "../redux/cart/cart.actions";
+import { getCart } from "../redux/cart/cart.actions";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 import Loading from "../components/Loading";

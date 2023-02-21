@@ -27,7 +27,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
-import { addToCart, clearErrors, clearErrorsCart } from "../../redux/cart/cart.actions";
+import { addToCart, clearErrors, clearErrorsCart, getCart } from "../../redux/cart/cart.actions";
 
 const DetailsBox = ({ element }) => {
   const toast = useToast();
@@ -70,6 +70,7 @@ const DetailsBox = ({ element }) => {
         size == "11"
       ) {
         dispatch(addToCart(prodId, token));
+        dispatch(getCart());
       } else {
         toast({
           title: "Preference",

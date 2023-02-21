@@ -1,7 +1,17 @@
 import { Box, Button, Divider, Heading, Text } from "@chakra-ui/react";
 import React from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const CartDetails = () => {
+  const {carts} = useSelector((store) => store.cart);
+  const [tax, setTax]= useState(500);
+  const [coupon, setCoupon]= useState(0);
+  var price = 0;
+  for(let i=0;i<carts.lenght; i++){
+    price += carts[i].prodId.price * carts[i].quantity
+  }
+  console.log(price);
   return (
     <Box>
       <Box
@@ -15,27 +25,37 @@ const CartDetails = () => {
         <Box padding={"20px"} display="grid" gap={"15px"}>
           <Box display={"flex"} justifyContent="space-between">
             <Text>Sub-Total</Text>
-            <Text>₹29,995</Text>
+            <Text>{`₹${parseFloat(carts.reduce(
+                  (acc, item) => acc + item.prodId.price * item.quantity,
+                  0
+                )).toLocaleString()}.00`}</Text>
           </Box>
           <Divider></Divider>
           <Box display={"flex"} justifyContent="space-between">
             <Text>Shipping</Text>
-            <Text>₹250</Text>
+            <Text>{`₹ ${parseFloat(
+              tax/2
+            ).toLocaleString()}.00`}</Text>
           </Box>
           <Divider></Divider>
           <Box display={"flex"} justifyContent="space-between">
             <Text>Taxes</Text>
-            <Text>₹250</Text>
+            <Text>{`₹ ${parseFloat(
+              tax/2
+            ).toLocaleString()}.00`}</Text>
           </Box>
           <Divider></Divider>
           <Box display={"flex"} justifyContent="space-between">
             <Text>Coupon</Text>
-            <Text>₹0</Text>
+            <Text>₹{coupon}.00</Text>
           </Box>
           <Divider></Divider>
           <Box display={"flex"} justifyContent="space-between">
             <Heading fontSize={"x-large"}>Total</Heading>
-            <Heading fontSize={"x-large"}>₹30,495</Heading>
+            <Heading fontSize={"x-large"}>{`₹${parseFloat(carts.reduce(
+                  (acc, item) => acc + item.prodId.price * item.quantity,
+                  tax
+                )).toLocaleString()}.00`}</Heading>
           </Box>
         </Box>
         <Box display={"grid"} gap="10px">

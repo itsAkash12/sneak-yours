@@ -5,10 +5,10 @@ import "../../styles/cartpage.css";
 import { useSelector } from "react-redux";
 
 const CartItems = ({toggle}) => {
-  const {carts} = useSelector((store) => store.cart);
+  const {carts,cartCount} = useSelector((store) => store.cart);
   return (
     <Box>
-      <Heading fontSize={"xx-large"}>Your Cart Items(3)</Heading>
+      <Heading fontSize={"xx-large"}>Your Cart Items({cartCount})</Heading>
       <Box
         padding="20px 0px"
         display={"grid"}
