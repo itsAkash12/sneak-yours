@@ -2,23 +2,25 @@ import { Box, Button, Image, Select, Text } from "@chakra-ui/react";
 import React from "react";
 import { ImCross } from "react-icons/im";
 import { useDispatch } from "react-redux";
-import { decreaseQuantity, deleteCart, getCart, increaseQuantity } from "../../redux/cart/cart.actions";
+import { clearErrors, decreaseQuantity, deleteCart, getCart, increaseQuantity } from "../../redux/cart/cart.actions";
 import "../../styles/cartpage.css";
 
 const CartCard = ({ title, image, price, quan, quantity, cartId, toggle }) => {
   const dispatch = useDispatch();
   const handleAddQuan=async(cartId)=> {
     await dispatch(increaseQuantity(cartId));
-    // dispatch(getCart(token));
     toggle()
+    dispatch((clearErrors()));
   }
   const handleDelQuan=async(cartId)=> {
     await dispatch(decreaseQuantity(cartId));
     toggle();
+    dispatch((clearErrors()));
   }
   const handleDeleteCart=async(cartId)=> {
     await dispatch(deleteCart(cartId));
     toggle();
+    dispatch((clearErrors()));
   }
   return (
     <Box

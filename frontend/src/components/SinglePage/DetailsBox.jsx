@@ -21,15 +21,19 @@ import {
   Text,
   useColorModeValue,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
-import { addToCart } from "../../redux/cart/cart.actions";
+import { addToCart, clearErrors, clearErrorsCart } from "../../redux/cart/cart.actions";
 
-const DetailsBox = ({element}) => {
+const DetailsBox = ({ element }) => {
+  const toast = useToast();
   const dispatch = useDispatch();
+  const state = useSelector((store) => store.cart);
+  // console.log(isSuccess)
   const cookies = new Cookies();
   const [flag, setFlag] = useState(false);
   const [size, setSize] = useState(0);
@@ -43,21 +47,64 @@ const DetailsBox = ({element}) => {
     setFlag(false);
     setSize(0);
   };
-  const strikePrice = element.price * element.discount/100
+  const strikePrice = (element.price * element.discount) / 100;
 
-  const handleAddtoCart=(prodId) => {
+  const handleAddtoCart = async (prodId) => {
     const token = cookies.get("jwtoken") || null;
-    if(!token){
-      return alert("Please login")
-    }
-    else{
-      if(size=="6" || size == "7" || size =="8" || size =="9" || size == "10" || size == "11"){
-        dispatch(addToCart(prodId, token))
-      }else{
-        return alert("please select size")
+    if (!token) {
+      toast({
+        title: "Error",
+        description: "You are not authorized for this action, please Login",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    } else {
+      if (
+        size == "6" ||
+        size == "7" ||
+        size == "8" ||
+        size == "9" ||
+        size == "10" ||
+        size == "11"
+      ) {
+        dispatch(addToCart(prodId, token));
+      } else {
+        toast({
+          title: "Preference",
+          description: "Please Select your prefered size",
+          status: "warning",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
       }
     }
-  }
+  };
+  useEffect(() => {
+    if (state.isError) {
+      toast({
+        title: "Error",
+        description: state.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    if (state.isSuccess) {
+      toast({
+        title: "Success",
+        description: state.message,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    dispatch(clearErrors());
+  }, [state.isSuccess, state.isError, state.message]);
   return (
     <Box className="details_container">
       <Box w="95%" m="auto">
@@ -77,17 +124,34 @@ const DetailsBox = ({element}) => {
         >
           <Heading className="type_text">{element.product_title}</Heading>
           <Box display={"flex"} gap="20px">
-          <Text
-            fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }}
-            fontWeight="bold"
-          >
-            ₹{parseFloat(element.price).toLocaleString()}.00
-          </Text>
-          <Text fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }} color={"#F51C28"}>{`${element.discount}% off`}</Text>
-          <del style={{display:"flex" , justifyContent:"center", alignItems:"center" ,fontSize: "1.2rem"}}>{`₹ ${parseFloat(element.price + strikePrice).toLocaleString()}.00`}</del>
+            <Text
+              fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }}
+              fontWeight="bold"
+            >
+              ₹{parseFloat(element.price).toLocaleString()}.00
+            </Text>
+            <Text
+              fontSize={{ base: "lg", md: "xl", lg: "2xl", xl: "2xl" }}
+              color={"#F51C28"}
+            >{`${element.discount}% off`}</Text>
+            <del
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "1.2rem",
+              }}
+            >{`₹ ${parseFloat(
+              element.price + strikePrice
+            ).toLocaleString()}.00`}</del>
           </Box>
         </Box>
-        <Box display={"flex"} flexDirection="column" gap="20px" color={"gray.700"}>
+        <Box
+          display={"flex"}
+          flexDirection="column"
+          gap="20px"
+          color={"gray.700"}
+        >
           <Text textDecoration={"underline"} textAlign="left" fontSize={"md"}>
             Shipping calculated at checkout.
           </Text>
@@ -124,9 +188,7 @@ const DetailsBox = ({element}) => {
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
-              <AccordionPanel pb={4}>
-                {element.description}
-              </AccordionPanel>
+              <AccordionPanel pb={4}>{element.description}</AccordionPanel>
             </AccordionItem>
           </Accordion>
         </Box>
@@ -172,50 +234,104 @@ const DetailsBox = ({element}) => {
                 <ModalBody>
                   <Stack>
                     <Divider></Divider>
-                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
-                      <Text letterSpacing={"1px"} fontWeight={"600"}>Manufacturer :</Text>
+                    <Box
+                      color={"gray.600"}
+                      fontSize={"20px"}
+                      display={"flex"}
+                      gap="10px"
+                    >
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>
+                        Manufacturer :
+                      </Text>
                       <Text>HOCHIMINH CITY , VIETNAM</Text>
                     </Box>
                     <Divider></Divider>
-                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
-                      <Text letterSpacing={"1px"} fontWeight={"600"}>Country Origin :</Text>
+                    <Box
+                      color={"gray.600"}
+                      fontSize={"20px"}
+                      display={"flex"}
+                      gap="10px"
+                    >
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>
+                        Country Origin :
+                      </Text>
                       <Text>VIETNAM</Text>
                     </Box>
                     <Divider></Divider>
-                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
-                      <Text letterSpacing={"1px"} fontWeight={"600"}>Imported By :</Text>
+                    <Box
+                      color={"gray.600"}
+                      fontSize={"20px"}
+                      display={"flex"}
+                      gap="10px"
+                    >
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>
+                        Imported By :
+                      </Text>
                       <Text>{`${element.seller_name}, ${element.seller_address}`}</Text>
                     </Box>
                     <Divider></Divider>
-                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
-                      <Text letterSpacing={"1px"} fontWeight={"600"}>Item Weight :</Text>
+                    <Box
+                      color={"gray.600"}
+                      fontSize={"20px"}
+                      display={"flex"}
+                      gap="10px"
+                    >
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>
+                        Item Weight :
+                      </Text>
                       <Text>0.95 Kg</Text>
                     </Box>
                     <Divider></Divider>
-                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
-                      <Text letterSpacing={"1px"} fontWeight={"600"}>Generic Name :</Text>
+                    <Box
+                      color={"gray.600"}
+                      fontSize={"20px"}
+                      display={"flex"}
+                      gap="10px"
+                    >
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>
+                        Generic Name :
+                      </Text>
                       <Text>{element.subtitle}</Text>
                     </Box>
                     <Divider></Divider>
-                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
-                      <Text letterSpacing={"1px"} fontWeight={"600"}>Unit of Measurement :</Text>
+                    <Box
+                      color={"gray.600"}
+                      fontSize={"20px"}
+                      display={"flex"}
+                      gap="10px"
+                    >
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>
+                        Unit of Measurement :
+                      </Text>
                       <Text>1 pair </Text>
                     </Box>
                     <Divider></Divider>
-                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
-                      <Text letterSpacing={"1px"} fontWeight={"600"}>Marketed By :</Text>
+                    <Box
+                      color={"gray.600"}
+                      fontSize={"20px"}
+                      display={"flex"}
+                      gap="10px"
+                    >
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>
+                        Marketed By :
+                      </Text>
                       <Text>Sneakyours India pvt Ltd.</Text>
                     </Box>
                     <Divider></Divider>
-                    <Box color={"gray.600"} fontSize={"20px"} display={"flex"} gap="10px">
-                      <Text letterSpacing={"1px"} fontWeight={"600"}>Article Code :</Text>
-                      <Text>{(element._id).toUpperCase()}</Text>
+                    <Box
+                      color={"gray.600"}
+                      fontSize={"20px"}
+                      display={"flex"}
+                      gap="10px"
+                    >
+                      <Text letterSpacing={"1px"} fontWeight={"600"}>
+                        Article Code :
+                      </Text>
+                      <Text>{element._id.toUpperCase()}</Text>
                     </Box>
                     <Divider></Divider>
                   </Stack>
-                  <ModalFooter>
-                    
-                  </ModalFooter>
+                  <ModalFooter></ModalFooter>
                 </ModalBody>
               </ModalContent>
             </Modal>
@@ -237,22 +353,22 @@ const DetailsBox = ({element}) => {
               textTransform={"uppercase"}
               letterSpacing="3px"
               _hover={{
-                background:`linear-gradient(
+                background: `linear-gradient(
                   140deg,
                   rgba(98, 4, 250, 1) 14%,
                   rgba(253, 29, 29, 1) 62%,
                   rgba(252, 176, 69, 1) 99%
                 )`,
-                color:'white',
+                color: "white",
                 boxShadow: "lg",
-                letterSpacing:"7px"
+                letterSpacing: "7px",
               }}
               _active={{
                 transform: "scale(0.95)",
-                backgroundColor:"gray.900",
-                color:'white'
+                backgroundColor: "gray.900",
+                color: "white",
               }}
-              onClick={()=>handleAddtoCart(element._id)}
+              onClick={() => handleAddtoCart(element._id)}
             >
               Add to cart
             </Button>

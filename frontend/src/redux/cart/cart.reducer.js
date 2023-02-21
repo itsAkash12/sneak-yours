@@ -1,11 +1,14 @@
-import { ADD_TO_CART, ADD_TO_CART_ERROR, CLEAR_ERRORS_CART, DEC_QUANTITY, DELETE_CART, ERRORS_GET, GET_CART, INC_QUANTITY, LOADING_CART, QUANTITY_ERROR } from "./cart.types";
+import { ADD_TO_CART, ADD_TO_CART_ERROR, CLEAR_ERRORS, DEC_QUANTITY, DELETE_CART, ERRORS_GET, FUNCTION_CART_CLEAR, GET_CART, INC_QUANTITY, LOADING_CART, QUANTITY_ERROR } from "./cart.types";
 
 const initialState = {
     carts:[],
     isLoading:false,
+    message:"",
     isError:false,
     isSuccess:false,
-    message:null
+    funcError:false,
+    funcSuccess:false,
+    funcMessage:""
 }
 
 const cartReducer = (state=initialState, {type,payload})=> {
@@ -20,37 +23,10 @@ const cartReducer = (state=initialState, {type,payload})=> {
                 ...state,
                 carts:payload,
                 isLoading:false,
-                isSuccess:true,
-                message:payload
             }
         }
         case ERRORS_GET:{
             return{
-                ...state,
-                isLoading:false,
-                isError:true,
-                message:payload
-            }
-        }
-        case INC_QUANTITY:{
-            return{
-                ...state,
-                isLoading:false,
-                isSuccess:true,
-                message:payload
-            }
-        }
-        case DEC_QUANTITY:{
-            return{
-                ...state,
-                isLoading:false,
-                isSuccess:true,
-                message:payload
-            }
-        }
-        case QUANTITY_ERROR:{
-            return{
-                ...state,
                 isLoading:false,
                 isError:true,
                 message:payload
@@ -60,25 +36,60 @@ const cartReducer = (state=initialState, {type,payload})=> {
             return{
                 ...state,
                 isSuccess:true,
-                message:payload
+                isError:false,
+                message:payload,
+                
             }
         }
         case ADD_TO_CART_ERROR:{
             return{
                 ...state,
+                isSuccess:false,
                 isError:true,
                 message:payload
+            }
+        }
+        case INC_QUANTITY:{
+            return{
+                ...state,
+                funcSuccess:true,
+                funcMessage:payload
+            }
+        }
+        case DEC_QUANTITY:{
+            return{
+                ...state,
+                funcSuccess:true,
+                funcMessage:payload
+            }
+        }
+        case QUANTITY_ERROR:{
+            return{
+                ...state,
+                funcError:true,
+                funcMessage:payload
             }
         }
         case DELETE_CART:{
             return{
                 ...state,
-                isSuccess:true,
-                message:payload
+                funcSuccess:true,
+                funcMessage:payload
             }
         }
-        case CLEAR_ERRORS_CART:{
+        case FUNCTION_CART_CLEAR:{
             return{
+                ...state,
+                funcSuccess:false,
+                funcError:false,
+                funcMessage:null
+            }
+        }
+        case CLEAR_ERRORS:{
+            return{
+                ...state,
+                isError:false,
+                isSuccess:false,
                 message:null
             }
         }

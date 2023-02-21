@@ -1,4 +1,4 @@
-import { CLEAR_ERROR, ERROR_AUTH, LOADING_AUTH, LOGIN_AUTH, SIGNUP_AUTH } from "./auth.actionTypes"
+import { CLEAR_ERRORS, ERROR_AUTH, LOADING_AUTH, LOGIN_AUTH, SIGNUP_AUTH } from "./auth.actionTypes"
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -43,9 +43,11 @@ const authReducer = (state = initialState, {type, payload})=> {
                 isError:true
             }
         }
-        case CLEAR_ERROR:{
+        case CLEAR_ERRORS:{
             return {
                 ...state,
+                isError:false,
+                isSuccess:false,
                 message:null
             }
         }

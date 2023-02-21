@@ -1,7 +1,9 @@
-import { CLEAR_ERROR, ERROR_AUTH, LOADING_AUTH, LOGIN_AUTH, SIGNUP_AUTH } from "./auth.actionTypes";
+import {CLEAR_ERRORS, ERROR_AUTH, LOADING_AUTH, LOGIN_AUTH, SIGNUP_AUTH } from "./auth.actionTypes";
 
 export const loadingAuth = ()=> ({type:LOADING_AUTH});
-export const clearErrors = ()=> ({type:CLEAR_ERROR});
+export const clearErrors = () => async (dispatch) => {
+    dispatch({ type: CLEAR_ERRORS });
+};
 export const signupAuth = (input)=> async(dispatch)=> {
     dispatch(loadingAuth({type:LOADING_AUTH}));
     try {
