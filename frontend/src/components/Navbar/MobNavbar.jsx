@@ -5,7 +5,8 @@ import "../../styles/navbar.css"
 import { BsFillCartFill } from "react-icons/bs";
 import DrawerJSX from "./DrawerJSX";
 
-const MobNavbar = () => {
+const MobNavbar = ({cartCount}) => {
+  
   return (
     <Box className="mob_navbar_container" >
       <Box>
@@ -29,7 +30,7 @@ const MobNavbar = () => {
               fontSize={"12px"}
               fontWeight="bolder"
             >
-              {2}
+              {cartCount}
             </Text>
           </Box>
         </Link>

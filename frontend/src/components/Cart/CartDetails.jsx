@@ -2,11 +2,16 @@ import { Box, Button, Divider, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CartDetails = () => {
+  const navigate = useNavigate();
   const {carts} = useSelector((store) => store.cart);
   const [tax, setTax]= useState(500);
   const [coupon, setCoupon]= useState(0);
+  const proceedCheckoutHandler=()=> {
+    navigate("/checkout")
+  }
   return (
     <Box>
       <Box
@@ -82,6 +87,7 @@ const CartDetails = () => {
                 backgroundColor: "gray.900",
                 color: "white",
               }}
+              onClick={proceedCheckoutHandler}
             >
               Proceed To Checkout
             </Button>
@@ -92,6 +98,7 @@ const CartDetails = () => {
               rounded={"20px"}
               textTransform={"uppercase"}
               letterSpacing="3px"
+              onClick={()=> navigate("/products")}
             >
               Shop More
             </Button>

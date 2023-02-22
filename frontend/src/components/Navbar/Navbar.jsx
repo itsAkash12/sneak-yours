@@ -6,10 +6,18 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import {useLocation} from "react-router-dom"
 import MobNavbar from './MobNavbar'
+import { useDispatch, useSelector } from "react-redux";
+import {getCart} from "../../redux/cart/cart.actions"
+
 
 const Navbar = () => {
+  const dispatch = useDispatch()
   const [toggle, setToggle]= useState(false);
   const location = useLocation();
+  const {cartCount} = useSelector((store) => store.cart);
+  useEffect(()=> {
+    dispatch(getCart())
+  },[])
 
   const toggleUp=()=>{
     if(window.scrollY >= 100 && window.location.pathname==="/"){
@@ -28,8 +36,8 @@ const Navbar = () => {
   
   return (
     <Box position="sticky" top="0" left="0" zIndex={"100"} width="100%" margin={"auto"} className={toggle ? "navbar-container_active":"navbar-container"}>
-      <WebNavbar />
-      <MobNavbar />
+      <WebNavbar cartCount={cartCount}/>
+      <MobNavbar cartCount={cartCount} />
     </Box>
   )
 }
