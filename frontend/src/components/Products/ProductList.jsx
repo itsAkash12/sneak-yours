@@ -12,24 +12,59 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
-import { IoIosArrowDown, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import React, { useEffect } from "react";
+import {
+  IoIosArrowDown,
+  IoIosArrowBack,
+  IoIosArrowForward,
+  IoIosHeart,
+} from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setNextPage, setPrevPage } from "../../redux/product/product.actions";
+import { addToWishlist, clearErrors } from "../../redux/wishlist/wishlist.actions";
 import "../../styles/products.css";
 import DrawerFilter from "./DrawerFilter";
 
 const ProductList = ({ products }) => {
   const { page } = useSelector((store) => store.product);
+  const toast = useToast()
+  const { isSuccess,isError,message } = useSelector((store) => store.wishlist);
   const dispatch = useDispatch();
-  const prevPageHandler=()=> {
-    dispatch(setPrevPage(1))
+  const prevPageHandler = () => {
+    dispatch(setPrevPage(1));
+  };
+  const nextPageHandler = () => {
+    dispatch(setNextPage(1));
+  };
+  const wishlistHandler =(id)=> {
+    dispatch(addToWishlist(id))
   }
-  const nextPageHandler = ()=> {
-    dispatch(setNextPage(1))
-  }
+  useEffect(() => {
+    if (isError) {
+      toast({
+        title: "Error",
+        description: message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    if (isSuccess) {
+      toast({
+        title: "Success",
+        description: message,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    dispatch(clearErrors());
+  }, [isSuccess,isError, message]);
   return (
     <Box
       className="product_container"
@@ -96,27 +131,55 @@ const ProductList = ({ products }) => {
           {products &&
             products.map((el) => (
               <GridItem key={el._id}>
-                <Link to={`/single/${el._id}`}>
-                  <div className="card">
-                    <div className="card2">
+                <div className="card">
+                  <div className="card2">
+                    <Link to={`/single/${el._id}`}>
                       <Image src={el.images[1].url}></Image>
                       <Box mt={"3px"}>
                         <Text color={"gray.600"}>{el.brand}</Text>
-                        <Text fontWeight={"bold"}>{(el.product_title).toUpperCase()}</Text>
+                        <Text fontWeight={"bold"}>
+                          {el.product_title.toUpperCase()}
+                        </Text>
                         <Text>₹{parseFloat(el.price).toLocaleString()}.00</Text>
                       </Box>
-                    </div>
+                    </Link>
+                    <Box w="90%" m={"auto"} mt={"10px"}>
+                      <Button
+                        w="100%"
+                        _hover={{
+                          backgroundColor: "black",
+                          color: "white",
+                        }}
+                        onClick={()=>wishlistHandler(el._id)}
+                      >
+                        <Box
+                          letterSpacing={"2px"}
+                          display={"flex"}
+                          gap="5px"
+                          alignItems="center"
+                        >
+                          <IoIosHeart fontSize={"20px"} color="red" />
+                          <Text>Wishlist</Text>
+                        </Box>
+                      </Button>
+                    </Box>
                   </div>
-                </Link>
+                </div>
               </GridItem>
             ))}
         </Grid>
       </Box>
       <Box display={"flex"} justifyContent="center" alignItems={"center"}>
         <ButtonGroup>
-          <Button isDisabled={page==1} onClick={prevPageHandler}><IoIosArrowBack fontSize={"25px"}></IoIosArrowBack></Button>
-          <Text fontSize={"lg"} fontWeight="bold" mt={"5px"}>{page}</Text>
-          <Button isDisabled={page==6} onClick={nextPageHandler}><IoIosArrowForward fontSize={"25px"}></IoIosArrowForward></Button>
+          <Button isDisabled={page == 1} onClick={prevPageHandler}>
+            <IoIosArrowBack fontSize={"25px"}></IoIosArrowBack>
+          </Button>
+          <Text fontSize={"lg"} fontWeight="bold" mt={"5px"}>
+            {page}
+          </Text>
+          <Button isDisabled={page == 6} onClick={nextPageHandler}>
+            <IoIosArrowForward fontSize={"25px"}></IoIosArrowForward>
+          </Button>
         </ButtonGroup>
       </Box>
     </Box>
