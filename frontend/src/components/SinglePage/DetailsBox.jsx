@@ -69,7 +69,7 @@ const DetailsBox = ({ element }) => {
         size == "10" ||
         size == "11"
       ) {
-        dispatch(addToCart(prodId, token));
+        await dispatch(addToCart(prodId, token));
         dispatch(getCart());
       } else {
         toast({

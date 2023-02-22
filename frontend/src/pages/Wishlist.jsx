@@ -69,7 +69,13 @@ const Wishlist = () => {
                 m="auto"
                 mt={"50px"}
                 display={"grid"}
-                gridTemplateColumns="repeat(3,1fr)"
+                gridTemplateColumns={{
+                  base: "repeat(1,1fr)",
+                  sm: "repeat(2,1fr)",
+                  md: "repeat(2,1fr)",
+                  lg: "repeat(3,1fr)",
+                  xl: "repeat(3,1fr)",
+                }}
                 gap="20px"
               >
                 {wishlists &&
@@ -91,12 +97,11 @@ const Wishlist = () => {
                             </Box>
                           </Link>
                           <Box
-                            w="90%"
                             m={"auto"}
                             mt={"10px"}
                             position={"absolute"}
                             top="0"
-                            right="-130"
+                            right="0"
                           >
                             <Button
                               bg={"white"}

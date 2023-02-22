@@ -3,6 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Cartpage from "../pages/Cartpage";
+import Checkout from "../pages/Checkout";
 import Homepage from "../pages/Homepage";
 import Loader from "../pages/Loader";
 import Login from "../pages/Login";
@@ -23,6 +24,7 @@ const Allroutes = () => {
         <Route path="/loader" element={<Loader />} />
         <Route path="/cart" element={<Cartpage />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Box>
   );

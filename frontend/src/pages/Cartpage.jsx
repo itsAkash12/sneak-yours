@@ -36,7 +36,7 @@ const Cartpage = () => {
               <Text>No Data To Show</Text>
             </Box>
           ) : (
-            <Box w={"95%"} className="cart_container">
+            <Box w={"95%"} className="cart_container" margin={"auto"} gap="10px">
               <CartItems toggle={toggle}></CartItems>
               <CartDetails></CartDetails>
             </Box>

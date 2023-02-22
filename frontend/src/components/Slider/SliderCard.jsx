@@ -16,7 +16,7 @@ function SliderCard({ img, title, subTitle, price, link }) {
             <Heading fontSize={"xl"}>{title}</Heading>
           </Box>
           <Box>
-            <Text>
+            <Text fontSize={"xl"}>
               <span>₹</span>
               {price}</Text>
           </Box>

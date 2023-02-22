@@ -49,7 +49,7 @@ function SliderCarousel({data}) {
   };
   return (
     <Box >
-      <Box className="iPhone_slider_heading">
+      <Box className="iPhone_slider_heading" >
         <Heading  fontSize={{ base: 'lg',sm:'xl', md: '2xl', lg: '3xl' }}>Best Selling</Heading>
         <Heading fontSize={{ base: 'lg',sm:'xl', md: '2xl', lg: '3xl' }}>JORDANS</Heading>
       </Box>
@@ -58,12 +58,10 @@ function SliderCarousel({data}) {
           {data && data.map((el, index) => (
             <Box key={index}>
               <SliderCard
-                img={el.imgUrl}
-                title={el.title}
-                rate={el.rate}
+                img={el.images[0].url}
+                title={el.product_title}
                 price={el.price}
-                subTitle={el.subTitle}
-                link={"/products"}
+                link={`/single/${el._id}`}
               />
             </Box>
           ))}

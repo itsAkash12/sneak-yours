@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const CartItems = ({toggle}) => {
   const {carts,cartCount} = useSelector((store) => store.cart);
   return (
-    <Box>
+    <Box borderWidth="medium" borderRadius={"10px"}>
       <Heading fontSize={"xx-large"}>Your Cart Items({cartCount})</Heading>
       <Box
         padding="20px 0px"

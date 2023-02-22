@@ -27,13 +27,11 @@ import { Link, useNavigate } from "react-router-dom";
 import InputSearch from "./InputSearch";
 import "../../styles/navbar.css";
 import Cookies from 'universal-cookie';
-import { useSelector } from "react-redux";
-const cookies = new Cookies();
 
-const WebNavbar = () => {
+const WebNavbar = ({cartCount}) => {
+  const cookies = new Cookies();
   const toast = useToast();
   const navigate = useNavigate();
-  const {cartCount} = useSelector((store) => store.cart);
   const [scrollTop, setScrollTop] = useState(0);
   const [height, setHeight] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,7 +40,6 @@ const WebNavbar = () => {
     onOpen: onOpenReportModal,
     onClose: onCloseReportModal,
   } = useDisclosure();
-
   const onScroll = () => {
     const winScroll = document.documentElement.scrollTop;
     const height =
