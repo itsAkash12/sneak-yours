@@ -7,7 +7,6 @@ const CartDetails = () => {
   const {carts} = useSelector((store) => store.cart);
   const [tax, setTax]= useState(500);
   const [coupon, setCoupon]= useState(0);
-  console.log(price);
   return (
     <Box>
       <Box
