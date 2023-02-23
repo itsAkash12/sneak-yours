@@ -92,7 +92,7 @@ const Shipping = () => {
           isClosable: true,
           position: "top",
         });
-        setInput({ ...formData, state: "", city: "", postalcode: "" });
+        setInput({ ...input, state: "", city: "", postalcode: "" });
       }
     }
   };
