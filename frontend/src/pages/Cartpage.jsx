@@ -10,6 +10,8 @@ import Cookies from "universal-cookie";
 import Loading from "../components/Loading";
 import { useState } from "react";
 import { LOADING_CART } from "../redux/cart/cart.types";
+import EmptyPage from "../components/NoDataFound"
+import image from "../assets/images/undraw_empty_cart_co35.png"
 
 const Cartpage = () => {
   const dispatch = useDispatch();
@@ -32,9 +34,7 @@ const Cartpage = () => {
       ) : (
         <Box margin="auto" mt={"50px"}>
           {carts == undefined ? (
-            <Box>
-              <Text>No Data To Show</Text>
-            </Box>
+            <EmptyPage width={"33%"} url={image} title={"Your Carts Don't have any Products Yet"} sub_title={"Add Products"}></EmptyPage>
           ) : (
             <Box w={"95%"} className="cart_container" margin={"auto"} gap="10px">
               <CartItems toggle={toggle}></CartItems>

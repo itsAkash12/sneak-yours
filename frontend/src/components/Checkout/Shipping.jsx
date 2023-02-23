@@ -34,7 +34,7 @@ const Shipping = () => {
     address: "",
     house: "",
     city: "",
-    country: "india",
+    state: "",
     number: "",
     postalcode: "",
   });
@@ -48,6 +48,33 @@ const Shipping = () => {
   };
   const checkoutHandler = () => {
     console.log(input);
+  };
+  const getPincodeData = async (e) => {
+    if (e.target.value.length === 6) {
+      const resp = await fetch(
+        `https://api.postalpincode.in/pincode/${e.target.value}`
+      );
+      const pinData = await resp.json();
+
+      if (pinData[0].Status === "Success") {
+        setInput({
+          ...input,
+          state: pinData[0].PostOffice[0].State,
+          city: pinData[0].PostOffice[0].District,
+          postalcode: e.target.value,
+        });
+      } else if (pinData[0].Status !== "Success") {
+        toast({
+          title: "Error",
+          description: "PLease Enter correct postalcode",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+        setInput({ ...formData, state: "", city: "", postalcode: "" });
+      }
+    }
   };
   return (
     <Box borderWidth="thin" borderRadius={"10px"} p="30px 40px">
@@ -123,14 +150,13 @@ const Shipping = () => {
               />
             </Box>
             <Box>
-              <FormLabel>Country</FormLabel>
-              <Select
-                name="country"
-                value={input.country}
+              <FormLabel>State</FormLabel>
+              <Input
+                placeholder="State"
+                name="state"
+                value={input.state}
                 onChange={inputValueHandler}
-              >
-                <option value="India">India</option>
-              </Select>
+              />
             </Box>
           </Box>
           <Box
@@ -157,8 +183,7 @@ const Shipping = () => {
               <Input
                 placeholder="City"
                 name="postalcode"
-                value={input.postalcode}
-                onChange={inputValueHandler}
+                onChange={getPincodeData}
               />
             </Box>
           </Box>

@@ -11,6 +11,9 @@ import { IoIosHeart, IoIosHeartDislike } from "react-icons/io";
 import { useState } from "react";
 import { clearErrors } from "../redux/wishlist/wishlist.actions";
 import Loading from "../components/Loading";
+import EmptyPage from "../components/NoDataFound"
+import image from "../assets/images/undraw_Wishlist_re_m7tv.png"
+
 
 const Wishlist = () => {
   const toast = useToast()
@@ -58,9 +61,7 @@ const Wishlist = () => {
       ) : (
         <Box mt={"30px"}>
           {wishlists == undefined ? (
-            <Box>
-              <Text>No data to show</Text>
-            </Box>
+            <EmptyPage width={"45%"} url={image} title={"No Wishlist Found PLease Add"} sub_title={"Add In Wishlist"}></EmptyPage>
           ) : (
             <Box>
               <Heading letterSpacing={"2px"}>My Wishlist</Heading>

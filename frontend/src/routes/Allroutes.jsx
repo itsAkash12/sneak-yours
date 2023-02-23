@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Error404 from "../components/Error404";
 import Navbar from "../components/Navbar/Navbar";
 import Cartpage from "../pages/Cartpage";
 import Checkout from "../pages/Checkout";
@@ -25,6 +26,7 @@ const Allroutes = () => {
         <Route path="/cart" element={<Cartpage />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </Box>
   );
