@@ -13,6 +13,7 @@ const wishlistReducer = (state = initialState, {type, payload})=> {
     switch (type) {
         case REQUEST_WISHLIST:{
             return {
+                ...state,
                 isLoading:true
             }
         }    
@@ -26,7 +27,6 @@ const wishlistReducer = (state = initialState, {type, payload})=> {
         }    
         case FAILED_WISHLIST:{
             return {
-                isLoading:false,
                 isError:false,
                 message:payload
             }
@@ -57,7 +57,6 @@ const wishlistReducer = (state = initialState, {type, payload})=> {
         case CLEAR_ERRORS:{
             return{
                 ...state,
-                isLoading:false,
                 isError:false,
                 isSuccess:false,
                 message:null

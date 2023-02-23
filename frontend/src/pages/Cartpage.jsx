@@ -12,6 +12,7 @@ import { useState } from "react";
 import { LOADING_CART } from "../redux/cart/cart.types";
 import EmptyPage from "../components/NoDataFound"
 import image from "../assets/images/undraw_empty_cart_co35.png"
+import Footer from "../components/Footer";
 
 const Cartpage = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Cartpage = () => {
       {isLoading ? (
         <Loading></Loading>
       ) : (
-        <Box margin="auto" mt={"50px"}>
+        <Box margin="auto" mt={"50px"} mb="30px">
           {carts == undefined ? (
             <EmptyPage width={"33%"} url={image} title={"Your Carts Don't have any Products Yet"} sub_title={"Add Products"}></EmptyPage>
           ) : (
@@ -43,6 +44,7 @@ const Cartpage = () => {
           )}
         </Box>
       )}
+      <Footer></Footer>
     </Box>
   );
 };

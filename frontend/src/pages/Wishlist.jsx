@@ -13,6 +13,7 @@ import { clearErrors } from "../redux/wishlist/wishlist.actions";
 import Loading from "../components/Loading";
 import EmptyPage from "../components/NoDataFound"
 import image from "../assets/images/undraw_Wishlist_re_m7tv.png"
+import Footer from "../components/Footer";
 
 
 const Wishlist = () => {
@@ -59,7 +60,7 @@ const Wishlist = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <Box mt={"30px"}>
+        <Box mt={"30px"} mb="20px">
           {wishlists == undefined ? (
             <EmptyPage width={"45%"} url={image} title={"No Wishlist Found PLease Add"} sub_title={"Add In Wishlist"}></EmptyPage>
           ) : (
@@ -133,6 +134,7 @@ const Wishlist = () => {
           )}
         </Box>
       )}
+      <Footer></Footer>
     </Box>
   );
 };

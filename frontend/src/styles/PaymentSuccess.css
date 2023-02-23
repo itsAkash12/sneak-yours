@@ -1,0 +1,48 @@
+.payment-success-animation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(190, 190, 190, 0.5);
+    /* z-index: 999; */
+    padding-top: 100px;
+  }
+  
+  .success-circle {
+    fill: transparent;
+    stroke-dasharray: 244;
+    stroke-dashoffset: 244;
+    animation: fill-circle 1s ease forwards;
+  }
+  
+  .success-check {
+    stroke-dasharray: 118;
+    stroke-dashoffset: 118;
+    animation: draw-check 0.6s ease forwards;
+    animation-delay: 0.6s;
+  }
+  
+  .success-text {
+    font-size: 24px;
+    color: #ffffff;
+    margin-top: 104px;
+  }
+  
+  @keyframes fill-circle {
+    to {
+      stroke-dashoffset: 0;
+      fill: #1fd000;
+    }
+  }
+  
+  @keyframes draw-check {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  

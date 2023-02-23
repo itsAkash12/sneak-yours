@@ -3,6 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Error404 from "../components/Error404";
 import Navbar from "../components/Navbar/Navbar";
+import PaymentSuccessAnimation from "../components/PaymentSuccess";
 import Cartpage from "../pages/Cartpage";
 import Checkout from "../pages/Checkout";
 import Homepage from "../pages/Homepage";
@@ -28,6 +29,7 @@ const Allroutes = () => {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/success" element={<PaymentSuccessAnimation />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Box>

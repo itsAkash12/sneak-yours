@@ -109,7 +109,7 @@ const Shipping = () => {
       </Box>
       <Box mt={"15px"} w={"100%"}>
         <FormControl isRequired>
-          <Box display={"grid"} gridTemplateColumns="repeat(2,1fr)" gap="10px">
+          <Box display={"grid"} gridTemplateColumns={{base:"repeat(1,1fr)", sm:"repeat(2,1fr)", md:"repeat(2,1fr)", lg:"repeat(2,1fr)", xl:"repeat(2,1fr)"}} gap="10px">
             <Box>
               <FormLabel>First name</FormLabel>
               <Input
@@ -132,7 +132,7 @@ const Shipping = () => {
           <Box
             mt={"15px"}
             display={"grid"}
-            gridTemplateColumns="3fr 1.5fr"
+            gridTemplateColumns={{base:"repeat(1,1fr)", sm:"3fr 1.5fr", md:"3fr 1.5fr", lg:"3fr 1.5fr", xl:"3fr 1.5fr"}}
             gap="10px"
           >
             <Box>
@@ -157,7 +157,7 @@ const Shipping = () => {
           <Box
             mt={"15px"}
             display={"grid"}
-            gridTemplateColumns="repeat(2,1fr)"
+            gridTemplateColumns={{base:"repeat(1,1fr)", sm:"repeat(2,1fr)", md:"repeat(2,1fr)", lg:"repeat(2,1fr)", xl:"repeat(2,1fr)"}}
             gap="10px"
           >
             <Box>
@@ -182,7 +182,7 @@ const Shipping = () => {
           <Box
             mt={"15px"}
             display={"grid"}
-            gridTemplateColumns="repeat(2,1fr)"
+            gridTemplateColumns={{base:"repeat(1,1fr)", sm:"repeat(2,1fr)", md:"repeat(2,1fr)", lg:"repeat(2,1fr)", xl:"repeat(2,1fr)"}}
             gap="10px"
           >
             <Box>
@@ -208,13 +208,13 @@ const Shipping = () => {
             </Box>
           </Box>
           <Box mt={"25px"} textAlign={"left"}>
-            <RadioGroup display={"flex"} gap="40px">
+            <RadioGroup display={"flex"} gap="40px" flexDirection={{base:"column", sm:"row", md:"row", lg:"row", xl:"row"}}>
               <Radio value="1">Home (All Day Delivery)</Radio>
               <Radio value="2">Office (Delivery Between 10Am to 5pm)</Radio>
             </RadioGroup>
           </Box>
         </FormControl>
-        <Box mt={"30px"} justifyContent="center" display="flex" gap="40px">
+        <Box mt={"30px"} justifyContent="center" display="flex" gap="40px" flexDirection={{base:"column", sm:"row", md:"row", lg:"row", xl:"row"}}>
           <Button
             type={"submit"}
             letterSpacing="1px"

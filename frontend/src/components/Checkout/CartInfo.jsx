@@ -34,7 +34,7 @@ const CartInfo = () => {
             <Box mt={"15px"} mb="15px">
               <Box display={"flex"} gap="20px" alignItems={"center"}>
                 <Image
-                  w="50%"
+                  w={{base:"40%", sm:"40%", md:"50%", lg:"50%", xl:"50%"}}
                   src={el.prodId.images[1].url}
                 />
                 <Box textAlign={"left"}>

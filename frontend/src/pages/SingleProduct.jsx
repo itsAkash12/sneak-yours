@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../redux/product/product.actions";
 import Loading from "../components/Loading";
+import Footer from "../components/Footer";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const SingleProduct = () => {
       {loading ? (
         <Loading></Loading>
       ) : (
-        <Box>
+        <Box mb={"20px"}>
           {singleProduct &&
             singleProduct.map((el) => (
               <Box
@@ -49,6 +50,7 @@ const SingleProduct = () => {
             ))}
         </Box>
       )}
+      <Footer></Footer>
     </Box>
   );
 };

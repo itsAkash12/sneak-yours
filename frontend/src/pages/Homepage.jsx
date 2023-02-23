@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCart } from "../redux/cart/cart.actions";
 import { getProducts } from "../redux/product/product.actions";
 import Loading from "../components/Loading";
+import Footer from "../components/Footer"
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const Homepage = () => {
         <SliderCarousel data={products} />
       )}
       <AdsCard />
+      <Footer></Footer>
     </Box>
   );
 };

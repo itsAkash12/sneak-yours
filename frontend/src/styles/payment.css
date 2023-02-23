@@ -15,7 +15,7 @@
     margin-top: 0px;
 }
 
-.card {
+.payment_card {
 	/* width: 60rem; */
     margin: auto;
     background: white;
@@ -90,23 +90,23 @@ p{
     padding:0 1rem;
 }
 
-.button{
+.payment_button{
     background: linear-gradient(
 135deg
 , #753370 0%, #298096 100%);
-    padding: 15px;
+    padding: 10px;
     border: none;
     border-radius: 50px;
     color: white;
     font-weight: 400;
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-top: 10px;
-    width:100%;
+    width:80%;
     letter-spacing: .11rem;
     outline:none;
 }
 
-.button:hover
+.payment_button:hover
 {
 	transform: scale(1.05) translateY(-3px);
     box-shadow: 3px 3px 6px #38373785;
@@ -116,7 +116,7 @@ p{
     .mainscreen{
         margin-top: 20px;
     }
-    .card{
+    .payment_card{
         flex-direction: column;
         width: 90%;
 
