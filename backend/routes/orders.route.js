@@ -4,7 +4,7 @@ const roleChecker = require("../middlewares/role.middleware");
 
 const orders = Router();
 
-orders.get("/", roleChecker, getOrders);
+orders.get("/", getOrders);
 orders.post("/create", createOrder);
 orders.get("/my/order", getMyAllOrders);
 orders.get("/:orderId", getOrderById);

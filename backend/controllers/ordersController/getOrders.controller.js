@@ -31,7 +31,7 @@ const getOrderById = async (req, res) => {
 const getMyAllOrders = async(req, res)=> {
     const userId = req.userId;
     try {
-        const orders = await OrderModel.find({user:userId});
+        const orders = await OrderModel.find({userId});
         res.send(orders);
     } catch (error) {
         res.send({

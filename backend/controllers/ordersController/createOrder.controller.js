@@ -1,35 +1,23 @@
 const OrderModel = require("../../models/orders.model");
+const CartModel = require("../../models/cart.model")
 
 const createOrder = async (req, res) => {
-  const {
-    shippingInfo,
-    orderItems,
-    paymentInfo,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    totalPrice,
-  } = req.body;
+  const {firstname,lastname,address,city,state,house,postalcode,number}=req.body
+  const userId = req.userId;
   try {
-    const order = new OrderModel({
-      shippingInfo,
-      orderItems,
-      paymentInfo,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice,
-      paidAt: Date.now(),
-      user: req.userId,
-    });
-    await order.save();
-    res.status(201).send({
-      message: "successs",
-      order,
-    });
+    const cart = await CartModel.find({ userId });
+    if (cart.length === 0) {
+      res.status(401).send({ message:"failed", description:"Your Cart Is Empty" });
+    } else {
+      for(let i=0; i<cart.length; i++){
+        await OrderModel.insertMany({userId:cart[i].userId, prodId:cart[i].prodId, quantity:cart[i].quantity, firstname,lastname,address,city,state,house,postalcode,number});
+      }
+      await CartModel.deleteMany({ userId });
+      res.send({ message:"success", description:"Purchase Successfull" });
+    }
   } catch (error) {
     res.send({
-      message: "failure",
+      message: "failed",
       description: error.message,
     });
   }
