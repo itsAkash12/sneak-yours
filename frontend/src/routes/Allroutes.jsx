@@ -8,6 +8,7 @@ import Checkout from "../pages/Checkout";
 import Homepage from "../pages/Homepage";
 import Loader from "../pages/Loader";
 import Login from "../pages/Login";
+import Payment from "../pages/Payment";
 import Productspage from "../pages/Productspage";
 import Signup from "../pages/Signup";
 import SingleProduct from "../pages/SingleProduct";
@@ -26,6 +27,7 @@ const Allroutes = () => {
         <Route path="/cart" element={<Cartpage />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Box>

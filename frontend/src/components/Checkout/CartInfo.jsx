@@ -1,8 +1,16 @@
 import { Box, Divider, Heading, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { TbTruckDelivery } from "react-icons/tb";
+import { useSelector } from "react-redux";
 
 const CartInfo = () => {
+  const { carts } = useSelector((store) => store.cart);
+  const [tax, setTax]= useState(500);
+  // const total = carts.reduce(
+  //   (acc, item) => acc + item.prodId.price * item.quantity,
+  //   tax
+  // )
+  const total = localStorage.getItem("total");
   return (
     <Box borderWidth="thin" borderRadius={"10px"} p="30px">
       <Box
@@ -20,36 +28,48 @@ const CartInfo = () => {
         </Heading>
       </Box>
       <Divider></Divider>
-      <Box mt={"15px"} mb="15px">
-        <Box display={"flex"} gap="20px" alignItems={"center"}>
-          <Image
-            w="50%"
-            src={
-              "http://res.cloudinary.com/dyv0uxpi2/image/upload/v1675203940/s8zxfrioousgkow4wbci.jpg"
-            }
-          />
-          <Box textAlign={"left"}>
-            <Text>Price: ₹29,999.00</Text>
-            <Text>Quantity: 02</Text>
+      {carts &&
+        carts.map((el) => (
+          <Box key={el._id}>
+            <Box mt={"15px"} mb="15px">
+              <Box display={"flex"} gap="20px" alignItems={"center"}>
+                <Image
+                  w="50%"
+                  src={el.prodId.images[1].url}
+                />
+                <Box textAlign={"left"}>
+                  <Text>{`Price: ₹${parseFloat(el.prodId.price).toLocaleString()}.00`}</Text>
+                  <Text>Quantity: {el.quantity}</Text>
+                </Box>
+              </Box>
+            </Box>
+            <Divider></Divider>
           </Box>
-        </Box>
-      </Box>
-      <Divider></Divider>
-      <Box display={"grid"} gap="20px"  mt={"15px"} mb="15px">
+        ))}
+      <Box display={"grid"} gap="20px" mt={"15px"} mb="15px">
         <Box display={"flex"} justifyContent="space-between">
           <Text>Shipping Charges</Text>
-          <Text>₹500.00</Text>
+          <Text>{`₹ ${parseFloat(
+              tax/2
+            ).toLocaleString()}.00`}</Text>
         </Box>
         <Box display={"flex"} justifyContent="space-between">
           <Text>Taxes Charges</Text>
-          <Text>₹500.00</Text>
+          <Text>{`₹ ${parseFloat(
+              tax/2
+            ).toLocaleString()}.00`}</Text>
         </Box>
       </Box>
       <Divider></Divider>
-      <Box  mt={"15px"} mb="15px">
-        <Box display={"flex"} justifyContent="space-between" fontSize={"xl"} fontWeight="600">
+      <Box mt={"15px"} mb="15px">
+        <Box
+          display={"flex"}
+          justifyContent="space-between"
+          fontSize={"xl"}
+          fontWeight="600"
+        >
           <Text>Total</Text>
-          <Text>₹30,499.00</Text>
+          <Text>{`₹${parseFloat(total).toLocaleString()}.00`}</Text>
         </Box>
       </Box>
     </Box>

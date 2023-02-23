@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const orderReducer = (state = initialState, { type, payload }) => {
-  switch (key) {
+  switch (type) {
     case REQUEST_ORDERS_HISTORY: {
       return {
         ...state,
@@ -25,15 +25,15 @@ const orderReducer = (state = initialState, { type, payload }) => {
         ...state,
         isLoading: false,
         isSuccess: true,
-        ordersHistory: payload,
+        message: payload
       };
     }
     case FAILURE_ORDERS_HISTORY: {
       return {
         ...state,
         isLoading: false,
-        isSuccess: true,
-        ordersHistory: payload,
+        isError: true,
+        message:payload
       };
     }
     default: {
@@ -41,3 +41,5 @@ const orderReducer = (state = initialState, { type, payload }) => {
     }
   }
 };
+
+export default orderReducer;

@@ -12,6 +12,11 @@ const CartDetails = () => {
   const proceedCheckoutHandler=()=> {
     navigate("/checkout")
   }
+  const total = carts.reduce(
+    (acc, item) => acc + item.prodId.price * item.quantity,
+    tax
+  )
+  localStorage.setItem("total",total);
   return (
     <Box>
       <Box
@@ -52,10 +57,7 @@ const CartDetails = () => {
           <Divider></Divider>
           <Box display={"flex"} justifyContent="space-between">
             <Heading fontSize={"x-large"}>Total</Heading>
-            <Heading fontSize={"x-large"}>{`₹${parseFloat(carts.reduce(
-                  (acc, item) => acc + item.prodId.price * item.quantity,
-                  tax
-                )).toLocaleString()}.00`}</Heading>
+            <Heading fontSize={"x-large"}>{`₹${parseFloat(total).toLocaleString()}.00`}</Heading>
           </Box>
         </Box>
         <Box display={"grid"} gap="10px">

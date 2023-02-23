@@ -19,13 +19,19 @@ import {
   Select,
   Stack,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { FaAddressBook } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getShippingDetails } from "../../redux/shippingDetails/shipping.actions";
 
 const Shipping = () => {
+  const toast = useToast()
+  const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {carts}= useSelector((store)=> store.cart)
   const cancelRef = useRef();
   const navigate = useNavigate();
   const [input, setInput] = useState({
@@ -46,8 +52,22 @@ const Shipping = () => {
       [name]: value,
     });
   };
-  const checkoutHandler = () => {
-    console.log(input);
+  const checkoutHandler = async() => {
+    if(input.address==""||input.firstname==""||input.lastname==""||input.number==""||input.house==""||input.city==""||input.postalcode==""||input.state==""){
+      return toast({
+        title: "Invalid Inputs",
+        description: "Please fill all the necessary input fields",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    else{
+      await dispatch(getShippingDetails(input));
+      localStorage.setItem("shippingInfo", JSON.stringify(input));
+      navigate("/payment")
+    }
   };
   const getPincodeData = async (e) => {
     if (e.target.value.length === 6) {
