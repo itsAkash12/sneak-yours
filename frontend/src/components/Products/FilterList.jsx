@@ -1,10 +1,50 @@
-import { Box, Heading, Input, RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack, Select, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import {
+  Box,
+  Heading,
+  Input,
+  RangeSlider,
+  RangeSliderFilledTrack,
+  RangeSliderThumb,
+  RangeSliderTrack,
+  Select,
+  Text,
+} from "@chakra-ui/react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../styles/products.css";
 
-const FilterList = () => {
+const FilterList = ({
+  setGender,
+  setCategory,
+  setBrand,
+  setColor,
+  setMinVal,
+  setMaxVal,
+}) => {
   const [min, setMin] = useState(0);
-  const [max, setMax] = useState(3000);
+  const [max, setMax] = useState(95000);
+  const colorArray = [
+    "white",
+    "black",
+    "red",
+    "blue",
+    "pink",
+    "yellow",
+    "green",
+    "brown",
+  ];
+  const initialRender = useRef(true);
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      const getData = setTimeout(() => {
+        setMinVal(min);
+        setMaxVal(max);
+      }, 2000);
+      return () => clearTimeout(getData);
+    }
+  }, [min, max]);
+
   return (
     <Box
       borderRight="2px solid "
@@ -26,7 +66,12 @@ const FilterList = () => {
         backgroundSize={"cover"}
         backgroundPosition="center center"
       >
-        <Heading textShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;" color={"white"}>FILTERING</Heading>
+        <Heading
+          textShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;"
+          color={"white"}
+        >
+          FILTERING
+        </Heading>
       </Box>
       <Box
         className="filter_section"
@@ -52,15 +97,20 @@ const FilterList = () => {
             </Heading>
             <Box textAlign={"left"} w="50%" margin={"auto"} mt="10px">
               <ul>
-                <Box display={"flex"} flexDirection="column" gap={"10px"}>
+                <Box
+                  display={"flex"}
+                  flexDirection="column"
+                  gap={"10px"}
+                  onClick={(e) => setGender(e.target.value)}
+                >
                   <li>
-                    <button>All Gender</button>
+                    <button value={""}>All Gender</button>
                   </li>
                   <li>
-                    <button>Male</button>
+                    <button value="men">Male</button>
                   </li>
                   <li>
-                    <button>Female</button>
+                    <button value="women">Female</button>
                   </li>
                 </Box>
               </ul>
@@ -74,24 +124,32 @@ const FilterList = () => {
             </Heading>
             <Box textAlign={"left"} w="50%" margin={"auto"} mt="10px">
               <ul>
-                <Box display={"flex"} flexDirection="column" gap={"10px"}>
+                <Box
+                  display={"flex"}
+                  flexDirection="column"
+                  gap={"10px"}
+                  onClick={(e) => setCategory(e.target.value)}
+                >
                   <li>
-                    <button>All JORDAN</button>
+                    <button value={"jordan"}>All JORDAN</button>
                   </li>
                   <li>
-                    <button>Jordan Low</button>
+                    <button value={"jordan_low"}>Jordan Low</button>
                   </li>
                   <li>
-                    <button>Jordan High</button>
+                    <button value={"jordan_high"}>Jordan High</button>
                   </li>
                   <li>
-                    <button>DUNKS</button>
+                    <button value={"jordan_4"}>Jordan 4</button>
                   </li>
                   <li>
-                    <button>YEEZYS</button>
+                    <button value={"dunks"}>DUNKS</button>
                   </li>
                   <li>
-                    <button>APPARELS</button>
+                    <button value={"yeezys"}>YEEZYS</button>
+                  </li>
+                  <li>
+                    <button value={"apparels"}>APPARELS</button>
                   </li>
                 </Box>
               </ul>
@@ -104,7 +162,7 @@ const FilterList = () => {
               Filter By Category
             </Heading>
             <Box textAlign={"left"} w="70%" margin={"auto"} mt="10px">
-              <Select>
+              <Select onChange={(e) => setBrand(e.target.value)}>
                 <option value="nike">Nike</option>
                 <option value="adidas">Adidas</option>
                 <option value="puma">Puma</option>
@@ -118,6 +176,16 @@ const FilterList = () => {
             >
               Filter By Colors
             </Heading>
+            <Box textAlign={"left"} w="70%" margin={"auto"} mt="10px">
+              <Select
+                textTransform={"capitalize"}
+                onChange={(e) => setColor(e.target.value)}
+              >
+                {colorArray.map((el) => (
+                  <option value={el}>{el}</option>
+                ))}
+              </Select>
+            </Box>
           </Box>
           <Box>
             <Heading
@@ -128,19 +196,27 @@ const FilterList = () => {
 
             <Box w="70%" margin={"auto"} mt="10px">
               <Box gap={"10px"} display={"flex"}>
-                <Input border={"1px solid"} type="number" value={min} onChange={(e)=> (setMin(e.target.value))}  />
-                <Input border={"1px solid"} type="number" value={max} onChange={(e)=> (setMax(e.target.value))} />
+                <Input
+                  border={"1px solid"}
+                  type="number"
+                  value={min}
+                  onChange={(e) => setMin(e.target.value)}
+                />
+                <Input
+                  border={"1px solid"}
+                  type="number"
+                  value={max}
+                  onChange={(e) => setMax(e.target.value)}
+                />
               </Box>
               <Box>
-                <RangeSlider onChange={(val) =>(
-                  setMin(val[0]),
-                  setMax(val[1])
-                )}
+                <RangeSlider
+                  onChange={(val) => (setMin(val[0]), setMax(val[1]))}
                   aria-label={["min", "max"]}
                   defaultValue={[min, max]}
-                  max="3000"
+                  max="95000"
                 >
-                  <RangeSliderTrack bg='red.400'>
+                  <RangeSliderTrack bg="red.400">
                     <RangeSliderFilledTrack />
                   </RangeSliderTrack>
                   <RangeSliderThumb bg={"red"} index={0} />

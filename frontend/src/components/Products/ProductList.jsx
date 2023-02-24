@@ -15,6 +15,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
+import { useState } from "react";
 import {
   IoIosArrowDown,
   IoIosArrowBack,
@@ -22,13 +23,13 @@ import {
   IoIosHeart,
 } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { setNextPage, setPrevPage } from "../../redux/product/product.actions";
+import { Link, useParams } from "react-router-dom";
+import { getProducts, setNextPage, setPrevPage } from "../../redux/product/product.actions";
 import { addToWishlist, clearErrors } from "../../redux/wishlist/wishlist.actions";
 import "../../styles/products.css";
 import DrawerFilter from "./DrawerFilter";
 
-const ProductList = ({ products }) => {
+const ProductList = ({ products, setSorting }) => {
   const { page } = useSelector((store) => store.product);
   const toast = useToast()
   const { isSuccess,isError,message } = useSelector((store) => store.wishlist);
@@ -106,9 +107,9 @@ const ProductList = ({ products }) => {
               >
                 SORT BY
               </MenuButton>
-              <MenuList>
-                <MenuItem>PRICE: Low to High</MenuItem>
-                <MenuItem>PRICE: High to Low</MenuItem>
+              <MenuList onClick={(e)=> setSorting(e.target.value)}>
+                <MenuItem value={"price_low"}>PRICE: Low to High</MenuItem>
+                <MenuItem value={"price_high"}>PRICE: High to Low</MenuItem>
                 <MenuItem>POPULARITY</MenuItem>
                 <MenuItem>LATEST</MenuItem>
               </MenuList>
