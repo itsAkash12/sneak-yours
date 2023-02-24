@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const { getProduct, addProduct, deleteProduct, updateProduct } = require("../controllers/productsController");
+const { getProduct,getProductById, addProduct, deleteProduct, updateProduct } = require("../controllers/productsController");
 const roleChecker = require("../middlewares/role.middleware")
 
 const products = Router();
 
 products.get("/", getProduct);
 products.post("/add", roleChecker, addProduct)
-products.get("/:id", getProduct);
+products.get("/:id", getProductById);
 products.delete("/delete/:id", roleChecker, deleteProduct)
 products.patch("/update/:id", roleChecker, updateProduct);
 

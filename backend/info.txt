@@ -1,0 +1,62 @@
+Welcome to BACKEND - BOOK STORE API.
+
+My name is Akash Kumar Singh and here I have created an API for managing the backend of Book Data in Store. Here you can pass different routes and queries to perform various tasks like Get, Post, Patch, Delete and Sorting etc. So lets get started.
+
+Base URL => http://localhost:PORT
+
+GET => 
+        /products  => It will give you all the data which is present under the Products Collection.
+
+        /products?sort=price_low&page=1 or price_high => Here you can get the data of that product which will be matched to the query.
+                                Example=> 
+                                http://localhost:8080/products?sort=price_low&page=2
+                                It will give data according to price in ascending and descending order.
+
+        /products/get/men => http://localhost:8080/products/get/men?page=2;
+        it will show you data for mens and womens basend on params;
+
+        products/get/men?page=1&sort=price_high => http://localhost:8080/products/get/men?page=1&sort=price_high;
+        it will show you data for mens  with soting in it acording to price;
+
+        /products?find=travis scott&page=1 ==> http://localhost:8080/products?find=travis scott&page=1;
+        it will show as per your search which will match to your title or description
+
+        /products?find=travis scott&page=1&sort=high ==> http://localhost:8080/products?find=travis scott&page=1&sort=high;
+        it will add sorting to it.
+
+        /products?brand=nike ==> http://localhost:8080/products?brand=nike&page=1
+         it will show as per your search which will match to your title or description
+
+        /products?brand=nike&page=1&sort=high ==> http://localhost:8080/products?find=travis scott&page=1&sort=high;
+        it will add sorting to it.
+
+        /products?brand=nike&colors=red ==> http://localhost:8080/products?brand=nike&colors=brown;
+
+        it will show colors with brand
+
+        /products?brand=nike&colors=brown&sort=price_low ==> http://localhost:8080/products?brand=nike&colors=brown&sort=price_low;
+
+        it will show colors with brand and sorting
+
+        /products?colors=red&page=1 ==> http://localhost:8080/products?colors=red&page=1;
+        it will show product with color
+
+        /products?colors=red&page=1&sort=price_low ==> http://localhost:8080/products?colors=red&page=1&sort=price_low;
+        it will add sorting to colors.
+
+        /products?category=jordan_4 ==> http://localhost:8080/products?brand=nike&page=1
+         it will show as per your search which will match to your title or description
+
+        /products?category=jordan_high&page=1&sort=high ==> http://localhost:8080/products?find=travis scott&page=1&sort=high;
+        it will add sorting to it.
+
+        /products?category=jordan_high&colors=red ==> http://localhost:8080/products?brand=nike&colors=brown;
+
+        it will show colors with category
+
+        /products?category=jordan_high&colors=brown&sort=price_low ==> http://localhost:8080/products?brand=nike&colors=brown&sort=price_low;
+
+        it will show colors with category and sorting
+
+
+                                            Thank You !!
