@@ -30,8 +30,9 @@ import "../../styles/products.css";
 import DrawerFilter from "./DrawerFilter";
 
 const ProductList = ({ products, setSorting }) => {
-  const { page } = useSelector((store) => store.product);
+  const { page, productCount } = useSelector((store) => store.product);
   const toast = useToast()
+  const {id} = useParams();
   const { isSuccess,isError,message } = useSelector((store) => store.wishlist);
   const dispatch = useDispatch();
   const prevPageHandler = () => {
@@ -66,6 +67,7 @@ const ProductList = ({ products, setSorting }) => {
     }
     dispatch(clearErrors());
   }, [isSuccess,isError, message]);
+  console.log(products.length);
   return (
     <Box
       className="product_container"
@@ -86,8 +88,9 @@ const ProductList = ({ products, setSorting }) => {
                 lg: "3xl",
                 xl: "4xl",
               }}
+              textTransform="uppercase"
             >
-              JORDAN SNEAKERS
+              {id ? `SNEAKERS` : "JORDANS"}
             </Heading>
           </Box>
           <Box display={"flex"} justifyContent="center" alignItems={"center"}>
@@ -178,7 +181,7 @@ const ProductList = ({ products, setSorting }) => {
           <Text fontSize={"lg"} fontWeight="bold" mt={"5px"}>
             {page}
           </Text>
-          <Button isDisabled={page == 6} onClick={nextPageHandler}>
+          <Button isDisabled={productCount < 12} onClick={nextPageHandler}>
             <IoIosArrowForward fontSize={"25px"}></IoIosArrowForward>
           </Button>
         </ButtonGroup>

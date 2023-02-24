@@ -1,6 +1,5 @@
 import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
-import FilterList from './FilterList'
 
 const DrawerFilter = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -19,10 +18,10 @@ const DrawerFilter = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Filtering</DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder='Type here...' />
+            
           </DrawerBody>
 
           <DrawerFooter>

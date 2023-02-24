@@ -21,10 +21,12 @@ import {
   AccordionPanel,
   useToast,
 } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { SEARCH_BY_VALUE } from "../../redux/product/product.types";
 
 const DrawerJSX = () => {
   const navigate = useNavigate()
@@ -49,6 +51,19 @@ const DrawerJSX = () => {
     })
     window.location.reload(false);
   }
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [search, setSearch] = useState("");
+  const handleSearchByValue = () => {
+    if (location.pathname == "/products") {
+      dispatch({ type: SEARCH_BY_VALUE, payload: search });
+      setSearch("");
+    } else {
+      navigate("/products");
+      dispatch({ type: SEARCH_BY_VALUE, payload: search });
+      setSearch("");
+    }
+  };
   return (
     <Box>
       <Box display={"flex"} justifyContent="center" alignItems={"center"}>
@@ -70,8 +85,8 @@ const DrawerJSX = () => {
 
           <DrawerBody>
             <Box display={"flex"}>
-              <Input placeholder="Type here..." />
-              <Button color={"white"} colorScheme="purple">
+              <Input placeholder="Type here..." onChange={(e) => setSearch(e.target.value)} />
+              <Button color={"white"} colorScheme="purple" onClick={() => handleSearchByValue()}>
                 SEARCH
               </Button>
             </Box>
@@ -107,13 +122,13 @@ const DrawerJSX = () => {
                   </h2>
                   <AccordionPanel pb={4}>
                     <Box display={"flex"} flexDirection="column" gap={"10px"}>
-                      <Link to={"/products"}>
+                      <Link to={"/products/men"}>
                         <Text fontWeight={"bold"}>- JORDAN High</Text>
                       </Link>
-                      <Link to={"/products"}>
+                      <Link to={"/products/men"}>
                         <Text fontWeight={"bold"}>- JORDAN Low</Text>
                       </Link>
-                      <Link to={"/products"}>
+                      <Link to={"/products/men"}>
                         <Text fontWeight={"bold"}>- DUNK</Text>
                       </Link>
                     </Box>
@@ -131,13 +146,13 @@ const DrawerJSX = () => {
                   </h2>
                   <AccordionPanel pb={4}>
                   <Box display={"flex"} flexDirection="column" gap={"10px"}>
-                      <Link to={"/products"}>
+                      <Link to={"/products/women"}>
                         <Text fontWeight={"bold"}>- JORDAN High</Text>
                       </Link>
-                      <Link to={"/products"}>
+                      <Link to={"/products/women"}>
                         <Text fontWeight={"bold"}>- JORDAN Low</Text>
                       </Link>
-                      <Link to={"/products"}>
+                      <Link to={"/products/women"}>
                         <Text fontWeight={"bold"}>- DUNK</Text>
                       </Link>
                     </Box>

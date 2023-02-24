@@ -1,10 +1,12 @@
-import { GET_PRODUCTS, LOADING_PRODUCTS, NEXT_PRODUCTS, PREV_PRODUCTS, SINGLE_PRODUCTS,  } from "./product.types"
+import { CLEAR_SEARCH, GET_PRODUCTS, LOADING_PRODUCTS, NEXT_PRODUCTS, PREV_PRODUCTS, SEARCH_BY_VALUE, SINGLE_PRODUCTS,  } from "./product.types"
 
 const initialState = {
     products:[],
     loading:false,
     page:1,
-    singleProduct:[]
+    singleProduct:[],
+    searchByValue:"",
+    productCount:"",
 }
 
 const productReducer = (state=initialState, {type,payload})=>{
@@ -19,7 +21,8 @@ const productReducer = (state=initialState, {type,payload})=>{
             return{
                 ...state, 
                 loading:false,
-                products:payload
+                products:payload.product,
+                productCount:payload.productCount,
             }
         }
         case NEXT_PRODUCTS:{
@@ -39,6 +42,18 @@ const productReducer = (state=initialState, {type,payload})=>{
                 ...state,
                 loading:false,
                 singleProduct:[payload]
+            }
+        }
+        case SEARCH_BY_VALUE:{
+            return {
+                ...state,
+                searchByValue:payload
+            }
+        }
+        case CLEAR_SEARCH:{
+            return {
+                ...state,
+                searchByValue:null
             }
         }
         default:{

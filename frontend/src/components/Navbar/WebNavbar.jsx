@@ -26,9 +26,9 @@ import { BsFillCartFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import InputSearch from "./InputSearch";
 import "../../styles/navbar.css";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
-const WebNavbar = ({cartCount}) => {
+const WebNavbar = ({ cartCount }) => {
   const cookies = new Cookies();
   const toast = useToast();
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const WebNavbar = ({cartCount}) => {
     const height =
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
-      
+
     const scrolled = (winScroll / height) * 100;
     setScrollTop(scrolled);
     setHeight(scrolled);
@@ -55,20 +55,20 @@ const WebNavbar = ({cartCount}) => {
   }, []);
   const name = cookies.get("name");
   const role = cookies.get("role");
-  const handleLogout = ()=> {
-    cookies.remove("jwtoken")
-    cookies.remove("name")
-    cookies.remove("role")
+  const handleLogout = () => {
+    cookies.remove("jwtoken");
+    cookies.remove("name");
+    cookies.remove("role");
     toast({
-      title: 'Success',
+      title: "Success",
       description: "Logged out Successfull",
-      status: 'success',
+      status: "success",
       duration: 3000,
       isClosable: true,
-      position:"top"
-    })
+      position: "top",
+    });
     window.location.reload(false);
-  }
+  };
   return (
     <Box className="web_navbar_container">
       <Flex objectFit={"cover"} justify={"space-around"} alignItems="center">
@@ -88,75 +88,78 @@ const WebNavbar = ({cartCount}) => {
             gap={"20px"}
           >
             <Menu border="none" isOpen={isOpen} size={"xl"}>
-              <MenuButton
-                background={"transparent"}
-                _hover={"transparent"}
-                _active={"transparent"}
-                // as={Button}
-                onMouseEnter={onOpen}
-                onMouseLeave={onClose}
-              >
-                <Box
-                  display={"flex"}
-                  justifyContent="center"
-                  alignItems={"center"}
+              <Link to="/products/men">
+                <MenuButton
+                  background={"transparent"}
+                  _hover={"transparent"}
+                  _active={"transparent"}
+                  // as={Button}
+                  onMouseEnter={onOpen}
+                  onMouseLeave={onClose}
                 >
-                  <Text
-                    fontWeight={"medium"}
-                    letterSpacing={"1px"}
-                    fontSize={"20px"}
+                  <Box
+                    display={"flex"}
+                    justifyContent="center"
+                    alignItems={"center"}
                   >
-                    MEN
-                  </Text>
-                  <IoIosArrowDown />
-                </Box>
-              </MenuButton>
-              <MenuList
+                    <Text
+                      fontWeight={"medium"}
+                      letterSpacing={"1px"}
+                      fontSize={"20px"}
+                    >
+                      MEN
+                    </Text>
+                  </Box>
+                </MenuButton>
+              </Link>
+              {/* <MenuList
                 onMouseEnter={onOpen}
                 onMouseLeave={onClose}
                 fontSize={"lg"}
                 color={"black"}
                 minW="x"
               >
-                <Link to="/products/id">
+                <Link to="/products/jordan_high">
                   <MenuItem>JORDAN High {">"}</MenuItem>
                 </Link>
-                <Link to={"/products/id"}>
+                <Link to={"/products/jordan_low"}>
                   <MenuItem>JORDAN Low {">"}</MenuItem>
                 </Link>
-                <Link to={"/products/id"}>
+                <Link to={"/products/dunk"}>
                   <MenuItem>DUNK {">"}</MenuItem>
                 </Link>
-                <Link to={"/products/id"}>
+                <Link to={"/products/apparel"}>
                   <MenuItem>APPAREL {">"}</MenuItem>
                 </Link>
-              </MenuList>
+              </MenuList> */}
             </Menu>
             <Menu border="none" isOpen={isOpenReportModal} size={"xl"}>
-              <MenuButton
-                background={"transparent"}
-                _hover={"transparent"}
-                _active={"transparent"}
-                // as={Button}
-                onMouseEnter={onOpenReportModal}
-                onMouseLeave={onCloseReportModal}
-              >
-                <Box
-                  display={"flex"}
-                  justifyContent="center"
-                  alignItems={"center"}
+              <Link to="/products/women">
+                <MenuButton
+                  background={"transparent"}
+                  _hover={"transparent"}
+                  _active={"transparent"}
+                  // as={Button}
+                  onMouseEnter={onOpenReportModal}
+                  onMouseLeave={onCloseReportModal}
                 >
-                  <Text
-                    fontWeight={"medium"}
-                    letterSpacing={"1px"}
-                    fontSize={"20px"}
+                  <Box
+                    display={"flex"}
+                    justifyContent="center"
+                    alignItems={"center"}
                   >
-                    WOMEN
-                  </Text>
-                  <IoIosArrowDown />
-                </Box>
-              </MenuButton>
-              <MenuList onMouseEnter={onOpenReportModal}
+                    <Text
+                      fontWeight={"medium"}
+                      letterSpacing={"1px"}
+                      fontSize={"20px"}
+                    >
+                      WOMEN
+                    </Text>
+                    {/* <IoIosArrowDown /> */}
+                  </Box>
+                </MenuButton>
+              </Link>
+              {/* <MenuList onMouseEnter={onOpenReportModal}
                 onMouseLeave={onCloseReportModal} fontSize={"lg"} color={"black"} minW="x">
               <Link to="/products/id">
                   <MenuItem>JORDAN High {">"}</MenuItem>
@@ -170,15 +173,19 @@ const WebNavbar = ({cartCount}) => {
                 <Link to={"/products/id"}>
                   <MenuItem>APPAREL {">"}</MenuItem>
                 </Link>
-              </MenuList>
+              </MenuList> */}
             </Menu>
           </Box>
           <Box display={"flex"} gap="20px">
             <Box display={"flex"} justifyContent="center" alignItems="center">
-              <Link to={"/products"}><Text fontSize={"20px"}>JORDAN</Text></Link>
+              <Link to={"/products"}>
+                <Text fontSize={"20px"}>JORDAN</Text>
+              </Link>
             </Box>
             <Box display={"flex"} justifyContent="center" alignItems="center">
-              <Link to={"/wishlist"}><Text fontSize={"20px"}>WISHLIST</Text></Link>
+              <Link to={"/wishlist"}>
+                <Text fontSize={"20px"}>WISHLIST</Text>
+              </Link>
             </Box>
             <Box w={"180px"}>
               <InputSearch></InputSearch>
@@ -191,29 +198,37 @@ const WebNavbar = ({cartCount}) => {
           alignItems="center"
           gap={"30px"}
         >
-         {name ? (
+          {name ? (
             <Popover>
               <PopoverTrigger>
-                  <Text fontSize="20px" color={"white"} >
-                    {(name).toUpperCase()}
-                  </Text>
+                <Text fontSize="20px" color={"white"}>
+                  {name.toUpperCase()}
+                </Text>
               </PopoverTrigger>
               <PopoverContent>
                 <PopoverArrow />
                 <PopoverCloseButton />
                 <PopoverHeader>Hello {name} !</PopoverHeader>
                 <PopoverBody display={"grid"} gap="10px">
-                  {
-                    role === "Admin" ? <Button bg={"#6104FA"} _hover={""}
-                    color={"white"}
-                    size={"sm"}
-                    letterSpacing="1px"
-                    onClick={()=> navigate("/admin")} >Admin Panel</Button> : <Box></Box>
-                  }
+                  {role === "Admin" ? (
+                    <Button
+                      bg={"#6104FA"}
+                      _hover={""}
+                      color={"white"}
+                      size={"sm"}
+                      letterSpacing="1px"
+                      onClick={() => navigate("/admin")}
+                    >
+                      Admin Panel
+                    </Button>
+                  ) : (
+                    <Box></Box>
+                  )}
                   <Button
                     size={"sm"}
                     color={"white"}
-                    bg={"red"} _hover={""}
+                    bg={"red"}
+                    _hover={""}
                     letterSpacing="1px"
                     onClick={handleLogout}
                   >
@@ -249,7 +264,7 @@ const WebNavbar = ({cartCount}) => {
                 </PopoverBody>
               </PopoverContent>
             </Popover>
-          )} 
+          )}
           <Link to={"/cart"}>
             <Box position={"relative"}>
               <BsFillCartFill fontSize={"28px"} color="white" />
@@ -267,8 +282,14 @@ const WebNavbar = ({cartCount}) => {
         </Box>
       </Flex>
       <Box className="div_five_container">
-        <Box h={height > 10 ? "4px":"0px"} className="div_five_container_progress">
-          <Box w={height > 10 ? `${scrollTop}%`: "0"} className="div_five_container_style"></Box>
+        <Box
+          h={height > 10 ? "4px" : "0px"}
+          className="div_five_container_progress"
+        >
+          <Box
+            w={height > 10 ? `${scrollTop}%` : "0"}
+            className="div_five_container_style"
+          ></Box>
         </Box>
       </Box>
     </Box>
