@@ -16,16 +16,16 @@ export const getProducts = (page,sorting,gender,category,brand,color,minVal,maxV
             res = await fetch(`${process.env.REACT_APP_BASEURL}products?sort=${sorting}&page=${page}`);
         }
         if(gender){
-            res = await fetch(`${process.env.REACT_APP_BASEURL}products?gender=${gender}?page=${page}`);
+            res = await fetch(`${process.env.REACT_APP_BASEURL}products?gender=${gender}&page=${page}`);
         }
         if(gender&&color){
-            res = await fetch(`${process.env.REACT_APP_BASEURL}products?gender=${gender}?colors=${color}&page=${page}`);
+            res = await fetch(`${process.env.REACT_APP_BASEURL}products?gender=${gender}&colors=${color}&page=${page}`);
         }
         if(gender&&color&&sorting){
-            res = await fetch(`${process.env.REACT_APP_BASEURL}products?gender=${gender}?colors=${color}&page=${page}&sort=${sorting}`);
+            res = await fetch(`${process.env.REACT_APP_BASEURL}products?gender=${gender}&colors=${color}&page=${page}&sort=${sorting}`);
         }
         if(gender && sorting ){
-            res = await fetch(`${process.env.REACT_APP_BASEURL}products?gender=${gender}?page=${page}&sort=${sorting}`)
+            res = await fetch(`${process.env.REACT_APP_BASEURL}products?gender=${gender}&page=${page}&sort=${sorting}`)
         }
         if(category){
             res = await fetch(`${process.env.REACT_APP_BASEURL}products?category=${category}&page=${page}`);
