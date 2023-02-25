@@ -10,7 +10,7 @@ const createOrder = async (req, res) => {
       res.status(401).send({ message:"failed", description:"Your Cart Is Empty" });
     } else {
       for(let i=0; i<cart.length; i++){
-        await OrderModel.insertMany({userId:cart[i].userId, prodId:cart[i].prodId, quantity:cart[i].quantity, firstname,lastname,address,city,state,house,postalcode,number});
+        await OrderModel.insertMany({userId:cart[i].userId, prodId:cart[i].prodId, orderCount:cart[i].quantity, firstname,lastname,address,city,state,house,postalcode,number});
       }
       await CartModel.deleteMany({ userId });
       res.send({ message:"success", description:"Purchase Successfull" });

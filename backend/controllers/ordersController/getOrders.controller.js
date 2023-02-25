@@ -7,7 +7,7 @@ const getOrders = async (req, res) => {
     res.send(order);
   } catch (error) {
     res.send({
-      message: "failed request",
+      message: "failed",
       description: error.message,
     });
   }
@@ -21,7 +21,7 @@ const getOrderById = async (req, res) => {
     res.send(order);
   } catch (error) {
     res.send({
-      message: "failed request",
+      message: "failed",
       description: error.message,
     });
   }
@@ -29,16 +29,21 @@ const getOrderById = async (req, res) => {
 
 // All orders of a single User
 const getMyAllOrders = async(req, res)=> {
-    const userId = req.userId;
-    try {
-        const orders = await OrderModel.find({userId});
-        res.send(orders);
-    } catch (error) {
-        res.send({
-            message: "failed request",
-            description: error.message,
-          });
+  const userID = req.userID;
+  try {
+    const order = await OrderModel.find({ userID }).populate([
+      "prodId",
+    ]);
+    if (order.length > 0) {
+      res.send(order);
+    } else {
+      res.send({ message:"failed", description:"You Don't Have any Orders at the moment" });
     }
+  } catch (error) {
+    res
+      .status(401)
+      .send({ message:"failed", description:error.message });
+  }
 }
 
 module.exports = { getOrders, getOrderById, getMyAllOrders };

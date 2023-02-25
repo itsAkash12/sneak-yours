@@ -227,6 +227,16 @@ const WebNavbar = ({ cartCount }) => {
                   <Button
                     size={"sm"}
                     color={"white"}
+                    bg={"purple.500"}
+                    _hover={""}
+                    letterSpacing="1px"
+                    onClick={()=> navigate("/account")}
+                  >
+                    My Account
+                  </Button>
+                  <Button
+                    size={"sm"}
+                    color={"white"}
                     bg={"red"}
                     _hover={""}
                     letterSpacing="1px"
@@ -250,7 +260,7 @@ const WebNavbar = ({ cartCount }) => {
                 <PopoverArrow />
                 <PopoverCloseButton />
                 <PopoverHeader>Hello Guest!</PopoverHeader>
-                <PopoverBody>
+                <PopoverBody display={"grid"} gap="10px">
                   <Button
                     size={"sm"}
                     colorScheme="green"

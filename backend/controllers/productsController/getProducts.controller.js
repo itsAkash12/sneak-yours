@@ -175,7 +175,11 @@ const getProduct = async (req, res) => {
         price: { $gte: min },
       });
     }
-    return res.send(product);
+    let productCount = 0;
+    for(let i=0; i<product.length; i++){
+      productCount++;
+    }
+    return res.send({product,productCount});
   } catch (error) {
     res.send({
       message: "failed",
