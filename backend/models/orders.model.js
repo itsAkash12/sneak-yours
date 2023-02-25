@@ -7,6 +7,7 @@ const orderSchema = new mongoose.Schema({
     ref: "users",
     required: true,
   },
+  orderCount:{ type: String, required:true },
   orderStatus: {
     type: String,
     required: true,
