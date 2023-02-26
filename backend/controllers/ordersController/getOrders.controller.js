@@ -37,9 +37,9 @@ const getOrderById = async (req, res) => {
 
 // All orders of a single User
 const getMyAllOrders = async(req, res)=> {
-  const userID = req.userID;
+  const userId = req.userId;
   try {
-    const order = await OrderModel.find({ userID }).populate([
+    const order = await OrderModel.find({ userId }).populate([
       "prodId",
     ]);
     if (order.length > 0) {
