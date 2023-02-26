@@ -224,7 +224,7 @@ const WebNavbar = ({ cartCount }) => {
                   ) : (
                     <Box></Box>
                   )}
-                  <Button
+                  {/* <Button
                     size={"sm"}
                     color={"white"}
                     bg={"purple.500"}
@@ -233,6 +233,16 @@ const WebNavbar = ({ cartCount }) => {
                     onClick={()=> navigate("/account")}
                   >
                     My Account
+                  </Button> */}
+                  <Button
+                    size={"sm"}
+                    color={"white"}
+                    bg={"purple"}
+                    _hover={""}
+                    letterSpacing="1px"
+                    onClick={()=> navigate("/orders")}
+                  >
+                    My Orders
                   </Button>
                   <Button
                     size={"sm"}

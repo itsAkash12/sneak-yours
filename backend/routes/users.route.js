@@ -23,8 +23,8 @@ users.post(
   users.get("/get/:id", getUsers);
   users.delete("/delete/:id", roleChecker, deleteUser);
 users.patch("/update/:id", updateUser);
-users.get("/forgot/reset", forgotUser);
-users.get("/logout", logoutUser);
+users.get("/forgot/reset",validate, forgotUser);
+users.get("/logout",validate, logoutUser);
 
 
 module.exports = users;

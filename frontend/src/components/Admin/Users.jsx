@@ -23,6 +23,7 @@ const Users = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
+  const [flag,setFlag]= useState(false);
 
   const getUsersAdmin = async (page) => {
     setIsLoading(true);
@@ -44,7 +45,7 @@ const Users = () => {
 
   useEffect(() => {
     getUsersAdmin(page);
-  }, [page]);
+  }, [page,flag]);
   if (isLoading) {
     return <Loading></Loading>;
   }
@@ -56,7 +57,7 @@ const Users = () => {
         p={4}
       >
         {usersList &&
-          usersList.map((user) => <UserCard key={user._id} user={user} />)}
+          usersList.map((user) => <UserCard key={user._id} user={user} setFlag={setFlag} flag={flag} />)}
       </Grid>
       <Box
         m={"20px 0px"}

@@ -2,7 +2,74 @@ import { Flex, Box, Grid, GridItem, Stat, StatLabel, StatNumber, Text, useColorM
 import { FaShoppingCart, FaUser, FaBoxOpen, FaMoneyBillWave, FaProductHunt } from "react-icons/fa";
 import { MdPeople, MdStar } from "react-icons/md";
 import ApexChart from "react-apexcharts";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 function Dashboard() {
+  const { token } = useSelector((store) => store.auth);
+  const [productCount, setProductCount]= useState(0)
+  const [userCount, setUserCount]= useState(0)
+  const [orderCount, setOrderCount]= useState(0)
+  const [sales, setSales]=useState(0);
+  const [outofStock, setOutofStock]=useState(0);
+  const getAllProducts= async()=> {
+    try {
+      let res = await fetch(`${process.env.REACT_APP_BASEURL}admin/products`,{
+        headers:{
+          authorization:token
+        }
+      });
+      let result = await res.json();
+      let data = result.products;
+      let count = 0;
+      for(let i=0; i<data.length; i++){
+        if(data[i].quantity === 0){
+          count++;
+        }
+      }
+      setOutofStock(count);
+      setProductCount(result.productsCount);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  const getAllUsers= async()=> {
+    try {
+      let res = await fetch(`${process.env.REACT_APP_BASEURL}admin/users`,{
+        headers:{
+          authorization:token
+        }
+      });
+      let result = await res.json();
+      setUserCount(result.usersCount);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  const getAllOrders= async()=> {
+    try {
+      let res = await fetch(`${process.env.REACT_APP_BASEURL}admin/orders`,{
+        headers:{
+          authorization:token
+        }
+      });
+      let result = await res.json();
+      let data = result.orders;
+      let prices = 0;
+      for(let i=0; i<data.length; i++){
+        prices += data[i].orderCount * data[i].prodId.price;
+      }
+      setSales(prices)
+      setOrderCount(result.ordersCount);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  useEffect(() => {
+    getAllProducts()
+    getAllUsers()
+    getAllOrders()
+  }, []);
+  
     const colorModeIcon = useColorModeValue();
     const userChartData = {
         options: {
@@ -22,7 +89,7 @@ function Dashboard() {
         series: [
           {
             name: "Users",
-            data: [10, 20, 15, 25, 20, 30, 35],
+            data: [0, 1, 2, 4, 2, 3, userCount],
           },
         ],
       };
@@ -39,13 +106,13 @@ function Dashboard() {
             enabled: false,
           },
           xaxis: {
-            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            categories: ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"],
           },
         },
         series: [
           {
             name: "Orders",
-            data: [30, 40, 45, 55, 60, 70],
+            data: [3, 3, 2, 1, orderCount, 0],
           },
         ],
       };
@@ -67,11 +134,13 @@ function Dashboard() {
             },
           },
           dataLabels: {
-            enabled: false,
+            enabled: true,
           },
         },
         series: [15, 10, 20, 5, 10],
-        labels: ["Electronics", "Books", "Clothing", "Home Goods", "Beauty"],
+        chartOptions: {
+          labels: ["Jordan-High", "Jordan-Low", "Jordan-4", "Yeezys", "Apparels"],
+        }
       };
   return (
     <Box px={[4, 8, 10]} py={[4, 6]}>
@@ -81,7 +150,7 @@ function Dashboard() {
           <Box borderRadius="lg" boxShadow="dark-lg" bgColor={useColorModeValue("white", "gray.700")} p={6}>
             <Stat>
               <StatLabel><FaProductHunt></FaProductHunt>Total Products</StatLabel>
-              <StatNumber>{66}</StatNumber>
+              <StatNumber>{productCount || 0}</StatNumber>
             </Stat>
           </Box>
         </GridItem>
@@ -93,7 +162,7 @@ function Dashboard() {
                 <FaShoppingCart />
               </StatLabel>
               <StatLabel>Total Orders</StatLabel>
-              <StatNumber>$5000</StatNumber>
+              <StatNumber>{orderCount || 0}</StatNumber>
             </Stat>
           </Box>
         </GridItem>
@@ -105,7 +174,7 @@ function Dashboard() {
                 <MdPeople />
               </StatLabel>
               <StatLabel>Total Users</StatLabel>
-              <StatNumber>{50}</StatNumber>
+              <StatNumber>{userCount || 0}</StatNumber>
             </Stat>
           </Box>
         </GridItem>
@@ -119,7 +188,7 @@ function Dashboard() {
               <StatLabel>
                 Total Sales
               </StatLabel>
-              <StatNumber>$5000</StatNumber>
+              <StatNumber>{`₹${parseFloat(sales).toLocaleString()}.00`}</StatNumber>
             </Stat>
           </Box>
         </GridItem>
@@ -141,7 +210,7 @@ function Dashboard() {
               <StatLabel>
                 <FaBoxOpen /> Out of Stock
               </StatLabel>
-              <StatNumber>5</StatNumber>
+              <StatNumber>{outofStock}</StatNumber>
             </Stat>
           </Box>
         </GridItem>

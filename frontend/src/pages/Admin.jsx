@@ -93,7 +93,7 @@ const AdminPanel = () => {
           bg={useColorModeValue("gray.300", "gray.700")}
           borderRightWidth="1px"
           borderRightColor={useColorModeValue("gray.200", "gray.700")}
-          w={isOpen ? "150px" : "100px"}
+          w={isOpen ? "200px" : "100px"}
           py={4}
           px={2}
           display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -112,6 +112,7 @@ const AdminPanel = () => {
                   onClick={() => setSelectedLink(link)}
                   display="flex"
                   letterSpacing={"1px"}
+                  textTransform="uppercase"
                 >
                   {link.name}
                 </Button>

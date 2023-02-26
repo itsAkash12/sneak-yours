@@ -7,6 +7,7 @@ import Loading from "../../components/Loading"
 const Orders = () => {
   const [ordersData, setOrdersData]= useState([]);
   const { token } = useSelector((store) => store.auth);
+  const [flag, setFlag] = useState(false);
   const [ordersCount, setOrdersCount]= useState(0);
   const [page, setPage]= useState(1);
   const [loading, setLoading]= useState(false);
@@ -30,7 +31,7 @@ const Orders = () => {
   }
   useEffect(() => {
     getOrdersAdmin(page)
-  }, [page])
+  }, [page,flag])
   if(loading){
     return <Loading></Loading>
   }
@@ -38,7 +39,7 @@ const Orders = () => {
     <Container maxW="container.lg" mt="6">
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={4}>
         {ordersData && ordersData.map((order) => (
-          <OrderCard key={order._id} order={order} />
+          <OrderCard key={order._id} order={order} flag={flag} setFlag={setFlag} />
         ))}
       </SimpleGrid>
       <Box m={"20px 0px"} display="flex" justifyContent={"center"} alignItems="center" gap={"20px"} >

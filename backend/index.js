@@ -6,7 +6,8 @@ const connect = require("./config/db");
 const {users, products, orders, carts,wishlists} = require("./routes")
 const authenticator = require("./middlewares/authenticator.middleware");
 const fileUpload = require("express-fileupload")
-const cookieParser = require("cookie-parser")
+const cookieParser = require("cookie-parser");
+const admin = require("./routes/admin.routes");
 
 const app = express();
 app.use(cors());
@@ -27,6 +28,7 @@ app.use("/products", products);
 app.use("/carts",authenticator, carts);
 app.use("/orders",authenticator, orders);
 app.use("/wishlists",authenticator, wishlists);
+app.use("/admin", authenticator, admin);
 
 app.listen(PORT, () => {
   connect();
