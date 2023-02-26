@@ -2,9 +2,17 @@ const OrderModel = require("../../models/orders.model");
 
 // For Admin
 const getOrders = async (req, res) => {
+  const {page} = req.query;
   try {
-    const order = await OrderModel.find();
-    res.send(order);
+    const order = await OrderModel.find().populate([
+      "prodId",
+    ]).limit(12)
+    .skip((page - 1) * 12);
+    let orderCount=0;
+    for(let i=0; i<order.length; i++){
+      orderCount++;
+    };
+    res.send({order, orderCount});
   } catch (error) {
     res.send({
       message: "failed",

@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../../models/users.model");
 
 const registerUser = async (req, res) => {
-  const { firstname, lastname, email, gender, password } = req.body;
+  const { firstname, lastname, email,number, gender, password } = req.body;
   try {
     const hashPassword = await argon2.hash(password);
     const user = new UserModel({
@@ -12,6 +12,7 @@ const registerUser = async (req, res) => {
       lastname,
       email,
       gender,
+      number,
       avatar:
         gender === "male"
           ? "https://res.cloudinary.com/dyv0uxpi2/image/upload/v1676217724/2289_SkVNQSBGQU1PIDEwMjgtMTIy_hmkupv.jpg"

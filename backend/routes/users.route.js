@@ -7,7 +7,7 @@ const validate = require("../middlewares/validator.middleware");
 const roleChecker = require("../middlewares/role.middleware");
 const users = Router();
 
-users.get("/", getUsers);
+users.get("/",roleChecker, getUsers);
 users.post(
   "/register",
   [
