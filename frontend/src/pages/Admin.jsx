@@ -21,6 +21,7 @@ import {
   FiSun,
   FiUsers,
   FiX,
+  FiEdit
 } from "react-icons/fi";
 import image from "../assets/images/SneakYours.png";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +31,7 @@ import Orders from "../components/Admin/Orders";
 import Reviews from "../components/Admin/Reviews";
 import Users from "../components/Admin/Users";
 import Cookies from "universal-cookie";
+import CreateProduct from "../components/Admin/CreateProduct";
 
 const AdminPanel = () => {
   const navigate = useNavigate();
@@ -58,6 +60,7 @@ const AdminPanel = () => {
     { name: "Users", icon: <FiUsers />, component: <Users /> },
     { name: "Orders", icon: <FiShoppingCart />, component: <Orders /> },
     { name: "Reviews", icon: <FiStar />, component: <Reviews /> },
+    { name: "Create-Products", icon: <FiEdit />, component: <CreateProduct /> },
   ];
 
   const [selectedLink, setSelectedLink] = useState(links[0]);  
