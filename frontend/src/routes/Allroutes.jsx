@@ -2,14 +2,11 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Error404 from "../components/Error404";
-import Navbar from "../components/Navbar/Navbar";
 import PaymentSuccessAnimation from "../components/PaymentSuccess";
-import Account from "../pages/Accountpage";
 import AdminPanel from "../pages/Admin";
 import Cartpage from "../pages/Cartpage";
 import Checkout from "../pages/Checkout";
 import Homepage from "../pages/Homepage";
-import Loader from "../pages/Loader";
 import Login from "../pages/Login";
 import Orders from "../pages/Order";
 import Payment from "../pages/Payment";
@@ -34,7 +31,6 @@ const Allroutes = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/admin" element={<AdminPanel />} />
-        {/* <Route path="/account" element={<Account />} /> */}
         <Route path="/success" element={<PaymentSuccessAnimation />} />
         <Route path="*" element={<Error404 />} />
       </Routes>

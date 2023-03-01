@@ -9,13 +9,11 @@ function App() {
   useEffect(() => {
     AOS.init({
       duration:800,
-      // anchorPlacement:'top-center'
       easing: 'ease-in-sine'
     });
   }, [])
   return (
     <Box className="App">
-      {/* <Navbar /> */}
       <Allroutes />
     </Box>
   );
