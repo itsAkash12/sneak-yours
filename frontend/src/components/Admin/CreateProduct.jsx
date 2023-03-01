@@ -6,17 +6,21 @@ import {
   FormLabel,
   Input,
   Textarea,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 const CreateProduct = () => {
+    const { token } = useSelector((store) => store.auth);
+    const toast = useToast();
   const initialState = {
     product_title: "",
     images: [],
     subtitle: "",
-    price: 0,
+    price: "",
     colors: "",
-    quantity: 0,
+    quantity: "",
     description: "",
     seller_name: "",
     seller_address: "",
@@ -27,29 +31,115 @@ const CreateProduct = () => {
   };
   const [formData, setFormData] = useState(initialState);
   const [productImages, setProductImages] = useState([]);
+  const [publish, setPublish] = useState(false);
 
-  const handleSetFormData = (e)=> {
+  const handleSetFormData = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setFormData({...formData, [name]:value});
-  }
-
-  const handleProductImagesChange = (e) => {
-    const selectedFiles = Array.from(e.target.files);
-    setProductImages(selectedFiles);
+    setFormData({ ...formData, [name]: value });
+  };
+  const uploadImg = async (image) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", process.env.REACT_APP_upload_preset);
+    data.append("cloud_name", process.env.REACT_APP_cloud_name);
+    let res = await fetch(`https://api.cloudinary.com/v1_1/dyv0uxpi2/upload`, {
+      method: "POST",
+      body: data,
+    });
+    return await res.json();
   };
 
+  const handleProductImagesChange = async (e) => {
+    setPublish(true);
+    const selectedFiles = e.target.files;
+    let arr = [];
+    for (let i = 0; i < selectedFiles.length; i++) {
+      let data = await uploadImg(selectedFiles[i]);
+      arr.push(data.secure_url);
+    }
+    await setProductImages(arr);
+    setPublish(false);
+  };
+
+  const addNewProducts=async(formData)=> {
+    console.log(formData)
+    try {
+        let res = await fetch(`${process.env.REACT_APP_BASEURL}products/add`,{
+            method:"POST",
+            headers: {
+                authorization:token
+            },
+            body:formData
+        });
+        let result = await res.json()
+        console.log(result);
+    } catch (error) {
+        console.log(error.message);
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Submit the form data to your backend
+    let {
+      product_title,
+      images,
+      subtitle,
+      price,
+      colors,
+      quantity,
+      description,
+      seller_name,
+      seller_address,
+      discount,
+      category,
+      brand,
+      deliverytime,
+    } = formData;
     setFormData((prev) => ({ ...prev, images: productImages }));
-    console.log(formData);
+    if (
+      !product_title ||
+      !images ||
+      !subtitle ||
+      !price ||
+      !colors ||
+      !quantity ||
+      !description ||
+      !seller_name ||
+      !seller_address ||
+      !discount ||
+      !category ||
+      !brand ||
+      !deliverytime
+    ) {
+        toast({
+            title: "Fill all the Credentials",
+            status: "error",
+            duration: 1000,
+            isClosable: true,
+            position: "top",
+          });
+    }else {
+        addNewProducts(formData);
+        toast({
+          title: "Product Added Successfully",
+          status: "success",
+          duration: 1200,
+          isClosable: true,
+          position: "top",
+        });
+  
+        // setFormData(initState);
+      }
   };
-
   return (
     <Box w={"80%"} mx="auto" mt="8" mb="8">
       <form onSubmit={handleSubmit}>
-        <VStack spacing="4" display={"grid"} gridTemplateColumns="repeat(2,1fr)" gap="20px">
+        <VStack
+          spacing="4"
+          display={"grid"}
+          gridTemplateColumns="repeat(2,1fr)"
+          gap="20px"
+        >
           <FormControl isRequired>
             <FormLabel>Product Name</FormLabel>
             <Input
@@ -74,7 +164,6 @@ const CreateProduct = () => {
             <FormLabel>Price</FormLabel>
             <Input
               placeholder="Enter product price"
-              type={Number}
               name="price"
               value={formData.price}
               onChange={(e) => handleSetFormData(e)}
@@ -86,7 +175,6 @@ const CreateProduct = () => {
             <Input
               placeholder="Enter product quantity"
               name="quantity"
-              type={Number}
               value={formData.quantity}
               onChange={(e) => handleSetFormData(e)}
             />
@@ -174,7 +262,12 @@ const CreateProduct = () => {
             />
           </FormControl>
 
-          <Button colorScheme="blue" type="submit">
+          <Button
+            isLoading={publish}
+            loadingText={"Uploading Images"}
+            colorScheme="blue"
+            type="submit"
+          >
             Create Product
           </Button>
         </VStack>
