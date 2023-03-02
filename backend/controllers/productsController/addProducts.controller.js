@@ -1,5 +1,17 @@
 require("dotenv").config();
 const ProductModel = require("../../models/products.model");
+
+const addProduct = async(req,res)=> {
+  let payload = req.body;
+  console.log(payload)
+  try {
+    await ProductModel.create(payload);
+        res.status(201).json({ message: "success", description: "Product Added Successfully" });
+  } catch (error) {
+    res.status(401).json({ message: "failed", description: error.message });
+  }
+}
+
 // const cloudinary = require("cloudinary").v2;
 // cloudinary.config({
 //   cloud_name: process.env.cloud_name,
@@ -63,16 +75,5 @@ const ProductModel = require("../../models/products.model");
 //     });
 //   }
 // };
-
-const addProduct = async(req,res)=> {
-  let payload = req.body;
-  console.log(payload)
-  try {
-    await ProductModel.create(payload);
-        res.status(201).json({ message: "success", description: "Product Added Successfully" });
-  } catch (error) {
-    res.status(401).json({ message: "failed", description: error.message });
-  }
-}
 
 module.exports = addProduct;

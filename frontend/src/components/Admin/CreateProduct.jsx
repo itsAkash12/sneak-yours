@@ -268,6 +268,7 @@ const CreateProduct = () => {
             colorScheme="blue"
             type="submit"
           >
+            
             Create Product
           </Button>
         </VStack>
